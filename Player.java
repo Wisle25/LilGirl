@@ -90,7 +90,7 @@ public class Player extends Entity
         int Speed = Math.abs(Movement.GetVelocity());
 
         if      (Speed == 0)                     EState = EntityState.IDLE;
-        else if (0 < Speed && Speed <= RunSpeed) EState = EntityState.WALK;
+        else if (0 < Speed && Speed <= WalkSpeed) EState = EntityState.WALK;
         else if (WalkSpeed < Speed && Speed <= RunSpeed)  EState = EntityState.RUN;
         // else if (Movement.IsFalling())                                        EState = EntityState.FALL;
     }
