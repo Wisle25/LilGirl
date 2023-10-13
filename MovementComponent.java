@@ -1,0 +1,100 @@
+public class MovementComponent  
+{
+    // ----- GameFramework ----- //
+
+    private Entity EntityOwner;
+
+    // ----- Lifecycle ---------- //
+
+    public MovementComponent(Entity ActorOwner)
+    {
+        this.EntityOwner = ActorOwner;
+        VelocityX = VelocityY = 0;
+    }
+
+    public void TickComponent()
+    {
+        Falling(); /* Same as simulating gravity */
+        HandleDeceleration();
+    }
+
+    // ----- Movement ---------- //
+
+    private int VelocityX;
+    private int VelocityY;
+    private int MaxSpeed;
+
+    private int Acceleration;
+    private int Deceleration;
+    private int JumpStrength;
+
+    /* Use this instead of "move" to move an entity */
+    public void AddVelocity(int Factor)
+    {
+        VelocityX = VelocityX + Acceleration * Factor;
+
+        // Clamping the velocity if it reaches the MaxSpeed
+        if (VelocityX >= MaxSpeed)  VelocityX = MaxSpeed;
+        if (VelocityX <= -MaxSpeed) VelocityX = -MaxSpeed;
+
+        EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY());
+    }
+
+    public void Jump()
+    {
+        if (!EntityOwner.IsOnGround()) return;
+        
+        VelocityY = JumpStrength;
+        EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+    }
+
+    // ----- Handler ---------- //
+
+    private boolean bIsFalling = false;
+    private final int FallingFactor = 3; /* Basically its as same as Gravity */
+
+    private void HandleDeceleration()
+    {
+        if (VelocityX > 0)
+        {
+            VelocityX -= Deceleration;
+
+            if (VelocityX < 0) VelocityX = 0;
+        }
+        else if (VelocityX < 0)
+        {
+            VelocityX += Deceleration;
+            if (VelocityX > 0) VelocityX = 0;
+        }
+    }
+
+    private void Falling()
+    {
+        // Only simulating when entity is not touching the ground
+        if (!EntityOwner.IsOnGround())
+        {
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+
+            bIsFalling = true;
+            VelocityY = VelocityY + FallingFactor;
+        }
+        else
+        {
+            VelocityY  = 0;
+            bIsFalling = false;
+        }
+    }
+
+    // ----- Accessors ---------- //
+
+    public boolean IsMaxSpeedEqual(int Value) { return MaxSpeed == Value; } 
+    public boolean IsFalling()       { return bIsFalling; }
+    public int     GetVelocity()     { return VelocityX; }
+
+    // ----- Modifiers ---------- //
+
+    public void SetAcceleration(int Value) { Acceleration = Value; }
+    public void SetDeceleration(int Value) { Deceleration = Value; }
+    public void SetMaxSpeed    (int Value) { MaxSpeed     = Value; }
+    public void SetJumpStrength(int Value) { JumpStrength = -Value; }
+}

@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Program Files\\Greenfoot\\lib\\greenfoot.jar",
+        "c:\\Program Files\\Greenfoot\\lib\\bluej.jar",
+        "/usr/share/greenfoot/greenfoot.jar",
+        "/usr/share/greenfoot/bluej.jar"
+    ]
+}
