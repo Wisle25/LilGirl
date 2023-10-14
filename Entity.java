@@ -14,7 +14,8 @@ public class Entity extends Actor
     
     public void act()
     {
-        if (Animations != null && !Animations.isEmpty()) 
+        HandleState();
+        if (Animations != null && !Animations.isEmpty())
         Animations.get(EState).TickComponent();
         Movement              .TickComponent();
     }
@@ -24,7 +25,25 @@ public class Entity extends Actor
     protected int Direction = 1;
     protected EntityState EState = EntityState.IDLE;
 
-    public void SetState(EntityState Value) { EState = Value; }
+    public void SetState(EntityState Value) 
+    { 
+        if (EState == Value) return;
+
+        EntityState LastState = EState;
+        EState                = Value; 
+
+        // Reset last animation state
+        if (Animations.containsKey(LastState))
+            Animations.get(LastState).Reset();
+
+        // Setup new animation
+        if (Animations.containsKey(EState))
+            Animations.get(EState).Setup();
+    }
+
+    protected void HandleState()
+    {
+    }
 
     // ----- Attributes ---------- //
 
@@ -42,7 +61,8 @@ public class Entity extends Actor
 
     private void Die()
     {
-        System.out.println(this.toString() + " Should Die!");
+        // Play die animation
+        SetState(EntityState.DIE);
     }
 
     // ----- Components ---------- //
@@ -68,5 +88,10 @@ public class Entity extends Actor
         Actor Ground = getOneObjectAtOffset(0, getImage().getHeight() / 2, Ground.class);
 
         return Ground != null;
+    }
+
+    public Actor GetGround()
+    {
+        return getOneObjectAtOffset(0, getImage().getHeight() / 2, Ground.class);
     }
 }

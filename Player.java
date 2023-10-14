@@ -24,7 +24,11 @@ public class Player extends Entity
 
         Animations.put(EntityState.IDLE, new AnimationComponent(this, Path + "Idle", 15));
         Animations.put(EntityState.WALK, new AnimationComponent(this, Path + "Walk", 10));
-        Animations.put(EntityState.RUN, new AnimationComponent(this, Path + "Run", 15));
+        Animations.put(EntityState.RUN, new AnimationComponent(this, Path + "Run", 8));
+        Animations.put(EntityState.FALL, new AnimationComponent(this, Path + "Jump", 5));
+
+        // Edit some properties
+        Animations.get(EntityState.FALL).SetPauseAtEnd(true);
     }
 
     @Override
@@ -32,13 +36,13 @@ public class Player extends Entity
     {
         super.SetupMovement();
 
-        WalkSpeed = 2;
-        RunSpeed  = 4;
+        WalkSpeed = 3;
+        RunSpeed  = 7;
 
         Movement.SetAcceleration(15);
         Movement.SetDeceleration(20);
         Movement.SetMaxSpeed(RunSpeed);
-        Movement.SetJumpStrength(20);
+        Movement.SetJumpStrength(30);
     }
 
     @Override
@@ -47,7 +51,7 @@ public class Player extends Entity
         super.act();
 
         HandleInput();
-        HandleState();
+        CameraFollow();
     }
 
     // ----- Handler ---------- //
@@ -59,7 +63,8 @@ public class Player extends Entity
             Flip(-1);
             Movement.AddVelocity(-1);
         }
-        else if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right"))
+        
+        if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right"))
         {
             Flip(1);
             Movement.AddVelocity(1);
@@ -85,13 +90,26 @@ public class Player extends Entity
             });
     }
 
-    private void HandleState()
+    @Override
+    protected void HandleState()
     {
         int Speed = Math.abs(Movement.GetVelocity());
+        
+        if      (Movement.IsFalling()) SetState(EntityState.FALL);
+        else if (Speed == 0)           SetState(EntityState.IDLE);
+        else if (0 < Speed && Speed <= WalkSpeed)         SetState(EntityState.WALK);
+        else if (WalkSpeed < Speed && Speed <= RunSpeed)  SetState(EntityState.RUN);
+    }
 
-        if      (Speed == 0)                     EState = EntityState.IDLE;
-        else if (0 < Speed && Speed <= WalkSpeed) EState = EntityState.WALK;
-        else if (WalkSpeed < Speed && Speed <= RunSpeed)  EState = EntityState.RUN;
-        // else if (Movement.IsFalling())                                        EState = EntityState.FALL;
+    // ----- Screen or Camera ---------- //
+
+    private void CameraFollow()
+    {
+        World World = getWorld();
+
+        int Width  = World.getWidth();
+        int Height = World.getHeight();
+
+        
     }
 }

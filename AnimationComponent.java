@@ -32,6 +32,8 @@ public class AnimationComponent
 
     public void TickComponent()
     {
+        if (CurrentPause && CurrentFrame == FrameCount - 1) return;
+
         if (Delay-- <= 0)
         {
             CurrentFrame = (CurrentFrame + 1) % FrameCount;
@@ -48,6 +50,19 @@ public class AnimationComponent
             Frame.mirrorHorizontally();
     }
 
+    public void Reset()
+    {
+        CurrentFrame = 0;
+        Delay        = 0;
+        CurrentPause = false;
+        ActorOwner.setImage(Frames[0]);
+    }
+
+    public void Setup()
+    {
+        CurrentPause = PauseAtEnd;
+    }
+
     // ----- Properties ----- //
 
     private GreenfootImage[] Frames;
@@ -55,6 +70,9 @@ public class AnimationComponent
     private int CurrentFrame;
     private int AnimSpeed;
     private int Delay;
+
+    private boolean PauseAtEnd   = false;
+    private boolean CurrentPause = PauseAtEnd;
 
     /*
      * Getting animations frames from folder
@@ -82,4 +100,8 @@ public class AnimationComponent
                 Frames[I] = new GreenfootImage(FolderPath + "/" + FileFrames[I].getName());
         }
     }
+
+    // ----- Modifiers ---------- //
+
+    public void SetPauseAtEnd(boolean Value) { PauseAtEnd = Value; CurrentPause = Value; }
 }

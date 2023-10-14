@@ -1,3 +1,5 @@
+import greenfoot.Actor;
+
 public class MovementComponent  
 {
     // ----- GameFramework ----- //
@@ -16,6 +18,7 @@ public class MovementComponent
     {
         Falling(); /* Same as simulating gravity */
         HandleDeceleration();
+        CreateCoyoteTimer();
     }
 
     // ----- Movement ---------- //
@@ -27,6 +30,9 @@ public class MovementComponent
     private int Acceleration;
     private int Deceleration;
     private int JumpStrength;
+
+    private int CoyoteTimer = 1;
+    private boolean WasOnGround = false;
 
     /* Use this instead of "move" to move an entity */
     public void AddVelocity(int Factor)
@@ -42,16 +48,51 @@ public class MovementComponent
 
     public void Jump()
     {
-        if (!EntityOwner.IsOnGround()) return;
+        if (!CanJump()) return;
         
         VelocityY = JumpStrength;
         EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
     }
 
+    public boolean CanJump()
+    {
+        UWorld World = EntityOwner.getWorldOfType(UWorld.class);
+
+        boolean Coyote   = !World.GetTimerManager().IsTimerFinished("CoyoteTimer"); 
+        boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
+
+        // Reset WasOnGround
+        if (bCanJump) WasOnGround = false;
+
+        return bCanJump;
+    }
+
     // ----- Handler ---------- //
 
     private boolean bIsFalling = false;
-    private final int FallingFactor = 3; /* Basically its as same as Gravity */
+    private final int FallingFactor = 2; /* Basically its as same as Gravity */
+
+    private void Falling()
+    {
+        // Only simulating when entity is not touching the ground
+        if (!EntityOwner.IsOnGround())
+        {
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+
+            bIsFalling = true;
+            VelocityY = VelocityY + FallingFactor;
+        }
+        else if (EntityOwner.IsOnGround() && bIsFalling)
+        {   
+            // Fix the landing position
+            Actor Ground = EntityOwner.GetGround();
+            EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight() - 5) / 2);
+
+            VelocityY   = 0;
+            WasOnGround = true;
+            bIsFalling  = false;
+        }
+    }
 
     private void HandleDeceleration()
     {
@@ -68,21 +109,16 @@ public class MovementComponent
         }
     }
 
-    private void Falling()
+    private void CreateCoyoteTimer()
     {
-        // Only simulating when entity is not touching the ground
-        if (!EntityOwner.IsOnGround())
+        if (WasOnGround && !EntityOwner.IsOnGround())
         {
-            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+            UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
-            bIsFalling = true;
-            VelocityY = VelocityY + FallingFactor;
+            World.GetTimerManager().StartTimer("CoyoteTimer", CoyoteTimer);
         }
-        else
-        {
-            VelocityY  = 0;
-            bIsFalling = false;
-        }
+
+        System.out.println("Coyote timer finished? " + EntityOwner.getWorldOfType(UWorld.class).GetTimerManager().IsTimerFinished("CoyoteTimer"));
     }
 
     // ----- Accessors ---------- //

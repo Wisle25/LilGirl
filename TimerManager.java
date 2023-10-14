@@ -23,6 +23,8 @@ public class TimerManager
 
             if (Timer <= 0) TimerToRemove.add(Key);
             else            TimerHandle.put(Key, Timer);
+
+            System.out.println("Key timer: " + Key + " has Timer " + Timer + " left." + " Timer left: " + TimerHandle.size());
         });
 
         TimerToRemove.forEach(TimerHandle::remove);
