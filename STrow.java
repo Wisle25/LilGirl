@@ -2,10 +2,11 @@ public class STrow extends Environment
 {
     // ----- Lifecycle ---------- //
 
-    public STrow(int Rotation)
+    public STrow(int Rotation, int Speed)
     {
-        setImage("images/Traps/Shuriken/STrow.png");
+        this.Speed = Speed;
 
+        setImage("images/Traps/Shuriken/STrow.png");
         setRotation(Rotation);
     }
 
@@ -21,6 +22,7 @@ public class STrow extends Environment
     private int ShootTimer = 300;
     private int EachShootTimer = 20;
     private int Count = 3;
+    private int Speed;
 
     private void Shoot()
     {
@@ -34,7 +36,7 @@ public class STrow extends Environment
 
         if (bShootEach && Count > 0)
         {
-            World.AddObject(new Shuriken(getRotation()), getX(), getY());
+            World.AddObject(new Shuriken(getRotation(), Speed), getX(), getY());
 
             --Count;
 

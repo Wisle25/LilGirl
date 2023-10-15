@@ -1,27 +1,41 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/**
- * Write a description of class Shuriken here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Shuriken extends Obstacle
 {
     // ----- Lifecycle ---------- //
 
-    public Shuriken(int Rotation)
+    public Shuriken(int Rotation, int Speed)
     {
-        Anim = new AnimationComponent(this, "images", 5);
+        Anim       = new AnimationComponent(this, "images/Shuriken/Shuriken", 5);
+        this.Speed = Speed;
 
         setRotation(Rotation);
     }
 
     public void act()
     {
-        // Add your action code here.
+        super.act();
+
+        Shoot();
     }
 
-    // ----- Components ---------- //
+    // ----- Combat ---------- //
+
+    private int Speed;
+    private int Distance    = 0;
+    private int MaxDistance = 50;
+
+    private void Shoot()
+    {   
+        if (Distance <= MaxDistance)
+        {
+            Distance += Speed;
+            move(Speed);
+        }
+        else
+        {
+            UWorld World = getWorldOfType(UWorld.class);
+
+            World.RemoveObject(this);
+        }
+    }
 
 }
