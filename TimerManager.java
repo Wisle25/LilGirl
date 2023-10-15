@@ -6,28 +6,21 @@ import java.util.Set;
 public class TimerManager 
 {
     private Map<String, Integer> TimerHandle;
+    private Set<String>          TimerToRemove;
 
     // ----- Lifecycle ---------- //
     
     public TimerManager()
     {
-        TimerHandle = new HashMap<>();
+        TimerHandle   = new HashMap<>();
+        TimerToRemove = new HashSet<>();
     }
 
     public void TickManager()
     {
-        Set<String> TimerToRemove = new HashSet<>();
-
-        TimerHandle.forEach((Key, Timer) -> {
-            --Timer;
-
-            if (Timer <= 0) TimerToRemove.add(Key);
-            else            TimerHandle.put(Key, Timer);
-
-            System.out.println("Key timer: " + Key + " has Timer " + Timer + " left." + " Timer left: " + TimerHandle.size());
-        });
-
+        TimerHandle  .forEach(this::RunTimer);
         TimerToRemove.forEach(TimerHandle::remove);
+        TimerToRemove.clear();
     }
     
     // ----- Timer ---------- //
@@ -37,10 +30,18 @@ public class TimerManager
         TimerHandle.put(Handler, Timer);
     }
 
+    private void RunTimer(String Key, Integer Timer)
+    {
+        --Timer;
+
+        if (Timer <= 0) TimerToRemove.add(Key);
+        else            TimerHandle.put(Key, Timer);
+    }
+
     public boolean IsTimerFinished(String Timer) 
     { 
         if (!TimerHandle.containsKey(Timer)) return true;
 
-        return TimerHandle.get(Timer) == 0; 
+        return false; 
     }
 }

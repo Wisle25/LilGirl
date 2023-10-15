@@ -42,7 +42,7 @@ public class Player extends Entity
         Movement.SetAcceleration(15);
         Movement.SetDeceleration(20);
         Movement.SetMaxSpeed(RunSpeed);
-        Movement.SetJumpStrength(30);
+        Movement.SetJumpStrength(20);
     }
 
     @Override

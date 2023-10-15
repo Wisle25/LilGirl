@@ -31,7 +31,7 @@ public class MovementComponent
     private int Deceleration;
     private int JumpStrength;
 
-    private int CoyoteTimer = 1;
+    private int CoyoteTimer = 7;
     private boolean WasOnGround = false;
 
     /* Use this instead of "move" to move an entity */
@@ -60,9 +60,6 @@ public class MovementComponent
 
         boolean Coyote   = !World.GetTimerManager().IsTimerFinished("CoyoteTimer"); 
         boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
-
-        // Reset WasOnGround
-        if (bCanJump) WasOnGround = false;
 
         return bCanJump;
     }
@@ -113,12 +110,11 @@ public class MovementComponent
     {
         if (WasOnGround && !EntityOwner.IsOnGround())
         {
+            WasOnGround  = false;
             UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
             World.GetTimerManager().StartTimer("CoyoteTimer", CoyoteTimer);
         }
-
-        System.out.println("Coyote timer finished? " + EntityOwner.getWorldOfType(UWorld.class).GetTimerManager().IsTimerFinished("CoyoteTimer"));
     }
 
     // ----- Accessors ---------- //

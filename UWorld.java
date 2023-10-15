@@ -21,10 +21,10 @@ public class UWorld extends World
     @Override
     public void act()
     {
-        M_TimerManager.TickManager();
-
         ScrollObjects();
         ScrollBackground();
+        
+        M_TimerManager.TickManager();
     }
 
     // ----- World ---------- //
