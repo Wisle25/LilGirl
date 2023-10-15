@@ -30,6 +30,10 @@ public class LevelOne extends UWorld
         SetPlayer(player, 500, 500);
         player.setLocation(40, 800);
 
+        Spike spike = new Spike(true);
+        AddObject(spike, 732, 836);
+        spike.SetDefaultLocation(732, 836);
+
         Ground ground = new Ground();
         AddObject(ground,275,610);
         Ground ground2 = new Ground();
@@ -70,5 +74,8 @@ public class LevelOne extends UWorld
         AddObject(ground13,1249,891);
         ground8.setLocation(1143,893);
         ground13.setLocation(1249,891);
+        
+        Gear gear = new Gear();
+        AddObject(gear,368,695);
     }
 }

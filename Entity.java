@@ -53,15 +53,13 @@ public class Entity extends Actor
     public void ReceiveDamage(int Damage)
     {
         Health = Health - Damage <= 0 ? 0 : Health - Damage;
-        System.out.println(this.toString() + " health is now " + Health);
 
         if (Health == 0)
             Die();
     }
 
-    private void Die()
+    protected void Die()
     {
-        // Play die animation
         SetState(EntityState.DIE);
     }
 
@@ -82,6 +80,21 @@ public class Entity extends Actor
     }
 
     // ----- Physics ---------- //
+
+    public boolean CheckAbove()
+    {
+        return getOneObjectAtOffset(0, -getImage().getHeight()/2 - 1, Environment.class) != null;
+    }
+
+    public boolean CheckRight()
+    {
+        return getOneObjectAtOffset(getImage().getWidth()/2 + 1, 0, Environment.class) != null;
+    }
+
+    public boolean CheckLeft()
+    {
+        return getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Environment.class) != null;
+    }
 
     public boolean IsOnGround()
     {

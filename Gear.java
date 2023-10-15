@@ -1,11 +1,12 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 public class Gear extends Obstacle
 {
     // ----- Components ---------- //
 
     public Gear()
     {
-        // Anim = new AnimationComponent(this, "images/Gear" , 10);
+        setImage("images/Traps/Gear/1.png");
+
+        Anim = new AnimationComponent(this, "images/Traps/Gear" , 3);
+        Anim.SetScale(100);
     }
 }

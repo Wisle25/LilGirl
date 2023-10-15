@@ -1,13 +1,6 @@
-import greenfoot.*;
-
 public class Obstacle extends Environment
 {
     // ----- Lifecycle ---------- //
-
-    public Obstacle()
-    {
-
-    }
 
     public void act()
     {
@@ -23,7 +16,7 @@ public class Obstacle extends Environment
 
     protected int Damage = 20;
 
-    private void Damaging()
+    protected void Damaging()
     {
         UWorld World       = getWorldOfType(UWorld.class);
         boolean bCanDamage = World.GetTimerManager().IsTimerFinished("Damaging");
@@ -37,7 +30,7 @@ public class Obstacle extends Environment
             Character.ReceiveDamage(Damage);
 
             // Start new timer
-            World.GetTimerManager().StartTimer("Damaging", 30);
+            World.GetTimerManager().StartTimer("Damaging", 20);
         }
     }
 }

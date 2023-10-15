@@ -18,6 +18,7 @@ public class MovementComponent
     {
         Falling(); /* Same as simulating gravity */
         HandleDeceleration();
+        HandleCollision();
         CreateCoyoteTimer();
     }
 
@@ -103,6 +104,27 @@ public class MovementComponent
         {
             VelocityX += Deceleration;
             if (VelocityX > 0) VelocityX = 0;
+        }
+    }
+
+    private void HandleCollision()
+    {
+        while (EntityOwner.CheckAbove()) 
+        {
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY()+1);
+            VelocityY = 0;
+        }
+
+        while (EntityOwner.CheckRight())
+        {
+            EntityOwner.setLocation(EntityOwner.getX() - 1, EntityOwner.getY());
+            VelocityX = 0;
+        }
+
+        while (EntityOwner.CheckLeft())
+        {
+            EntityOwner.setLocation(EntityOwner.getX() + 1, EntityOwner.getY());
+            VelocityX = 0;
         }
     }
 

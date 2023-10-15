@@ -81,10 +81,10 @@ public class UWorld extends World
         RangeX = Math.min(RangeX, getWidth());
         RangeY = Math.min(RangeY, getHeight());
 
-        ActorMinX = getWidth()/2-RangeX/2;
-        ActorMaxX = getWidth()/2+RangeX/2;
-        ActorMinY = getHeight()/2-RangeY/2;
-        ActorMaxY = getHeight()/2+RangeY/2;
+        ActorMinX = getWidth() / 2 - RangeX / 2;
+        ActorMaxX = getWidth() / 2 + RangeX / 2;
+        ActorMinY = getHeight() / 2 - RangeY / 2;
+        ActorMaxY = getHeight() / 2 + RangeY / 2;
     }
 
     public void SetScrollingBackground(GreenfootImage ScrollingBackground)

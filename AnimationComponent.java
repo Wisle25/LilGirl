@@ -63,6 +63,12 @@ public class AnimationComponent
         CurrentPause = PauseAtEnd;
     }
 
+    public void SetScale(int NewScale)
+    {
+        for (GreenfootImage Frame : Frames)
+            Frame.scale(NewScale, NewScale);
+    }
+
     // ----- Properties ----- //
 
     private GreenfootImage[] Frames;
