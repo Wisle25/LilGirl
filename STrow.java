@@ -7,6 +7,7 @@ public class STrow extends Environment
         this.Speed = Speed;
 
         setImage("images/Traps/Shuriken/STrow.png");
+        getImage().scale(20, 20);
         setRotation(Rotation);
     }
 
@@ -19,7 +20,7 @@ public class STrow extends Environment
 
     // ----- Combat ---------- //
 
-    private int ShootTimer = 300;
+    private int ShootTimer = 100;
     private int EachShootTimer = 20;
     private int Count = 3;
     private int Speed;

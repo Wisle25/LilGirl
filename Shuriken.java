@@ -4,7 +4,8 @@ public class Shuriken extends Obstacle
 
     public Shuriken(int Rotation, int Speed)
     {
-        Anim       = new AnimationComponent(this, "images/Shuriken/Shuriken", 5);
+        Anim       = new AnimationComponent(this, "images/Traps/Shuriken/Shuriken", 5);
+        Anim.SetScale(10);
         this.Speed = Speed;
 
         setRotation(Rotation);
@@ -21,7 +22,7 @@ public class Shuriken extends Obstacle
 
     private int Speed;
     private int Distance    = 0;
-    private int MaxDistance = 50;
+    private int MaxDistance = 150;
 
     private void Shoot()
     {   
