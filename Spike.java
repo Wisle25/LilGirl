@@ -6,7 +6,7 @@ public class Spike extends Obstacle
 
     public Spike()
     {
-        setImage("images/Traps/Spikes/Spike.png");
+        setImage("images/Traps/Spike/Spike.png");
     }
 
     public Spike(boolean AllowMoving)
