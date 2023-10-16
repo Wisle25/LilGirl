@@ -83,17 +83,17 @@ public class Entity extends Actor
 
     public boolean CheckAbove()
     {
-        return getOneObjectAtOffset(0, -getImage().getHeight()/2 - 1, Obstacle.class) != null;
+        return getOneObjectAtOffset(0, -getImage().getHeight()/2 - 1, Environment.class) != null;
     }
 
     public boolean CheckRight()
     {
-        return getOneObjectAtOffset(getImage().getWidth()/2 + 1, 0, Obstacle.class) != null;
+        return getOneObjectAtOffset(getImage().getWidth()/2 + 1, 0, Environment.class) != null;
     }
 
     public boolean CheckLeft()
     {
-        return getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Obstacle.class) != null;
+        return getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Environment.class) != null;
     }
 
     public boolean IsOnGround()

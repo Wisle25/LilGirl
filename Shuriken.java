@@ -1,3 +1,5 @@
+import greenfoot.Actor;
+
 public class Shuriken extends Obstacle
 {
     // ----- Lifecycle ---------- //
@@ -7,6 +9,7 @@ public class Shuriken extends Obstacle
         Anim       = new AnimationComponent(this, "images/Traps/Shuriken/Shuriken", 5);
         Anim.SetScale(10);
         this.Speed = Speed;
+        this.Damage = 15;
 
         setRotation(Rotation);
     }
@@ -25,7 +28,16 @@ public class Shuriken extends Obstacle
     private int MaxDistance = 250;
 
     private void Shoot()
-    {   
+    {
+        Actor Player = getOneIntersectingObject(Player.class);
+
+        if (Player != null)
+        {
+            getWorldOfType(UWorld.class).RemoveObject(this);
+
+            return;
+        }
+        
         if (Distance <= MaxDistance)
         {
             Distance += Speed;
@@ -33,6 +45,7 @@ public class Shuriken extends Obstacle
         }
         else
         {
+            Distance     = 0;
             UWorld World = getWorldOfType(UWorld.class);
 
             World.RemoveObject(this);

@@ -21,9 +21,11 @@ public class STrow extends Environment
 
     private Shuriken[] Shurikens = new Shuriken[3];
 
-    private int ShootTimer = 100;
-    private int EachShootTimer = 20;
+    private int ShootTimer = 150;
+    private int EachShootTimer = 10;
     private int Count = 0;
+
+    private boolean Shooting = false;
 
     private void CreateShuriken(int Rotation, int Speed)
     {
@@ -35,24 +37,27 @@ public class STrow extends Environment
     {
         UWorld World = getWorldOfType(UWorld.class);
 
-        boolean bCanShoot = World.GetTimerManager().IsTimerFinished("ShootTimer");
-
-        if (!bCanShoot) return;
-
+        boolean bCanShoot  = World.GetTimerManager().IsTimerFinished("ShootTimer");
         boolean bShootEach = World.GetTimerManager().IsTimerFinished("EachShootTimer");
+        
+        if (bCanShoot)
+        {
+            Shooting = true;
+        }
 
-        if (bShootEach && Count < 3)
+        if (Shooting && bShootEach && Count < 3)
         {
             World.AddObject(Shurikens[Count++], getX(), getY());
 
             World.GetTimerManager().StartTimer("EachShootTimer", EachShootTimer);
         }
-        else if (bShootEach && Count == 3)
+        else if (Shooting && bShootEach && Count == 3)
         {
             Count = 0;
+            Shooting = false;
 
             // Create new timer to shoot
             World.GetTimerManager().StartTimer("ShootTimer", ShootTimer);
         }
-    }
+    } 
 }
