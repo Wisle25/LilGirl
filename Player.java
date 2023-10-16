@@ -58,6 +58,7 @@ public class Player extends Entity
         super.act();
 
         HandleInput();
+        Crawling();
     }
 
     // ----- Handler ---------- //
@@ -110,5 +111,17 @@ public class Player extends Entity
         else if (Speed == 0)           SetState(EntityState.IDLE);
         else if (0 < Speed && Speed <= WalkSpeed)         SetState(EntityState.WALK);
         else if (WalkSpeed < Speed && Speed <= RunSpeed)  SetState(EntityState.RUN);
+    }
+
+    private void Crawling()
+    {
+        boolean Left = getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Ground.class) != null;
+        boolean Right = getOneObjectAtOffset(getImage().getWidth() / 2 + 1, 0, Ground.class) != null;
+
+        if (Left || Right)
+        {
+            Movement.SetCanFall(false);
+            setLocation(getX(), getY() + 1);
+        }
     }
 }

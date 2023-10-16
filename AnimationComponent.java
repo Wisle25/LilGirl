@@ -32,7 +32,7 @@ public class AnimationComponent
 
     public void TickComponent()
     {
-        if (CurrentPause && CurrentFrame == FrameCount - 1) return;
+        if (CurrentPause && IsFinished()) return;
 
         if (Delay-- <= 0)
         {
@@ -105,6 +105,11 @@ public class AnimationComponent
             for (int I = 0; I < FrameCount; ++I)
                 Frames[I] = new GreenfootImage(FolderPath + "/" + FileFrames[I].getName());
         }
+    }
+
+    public boolean IsFinished()
+    {
+        return CurrentFrame == FrameCount - 1;
     }
 
     // ----- Modifiers ---------- //

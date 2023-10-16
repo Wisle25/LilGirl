@@ -68,10 +68,13 @@ public class MovementComponent
     // ----- Handler ---------- //
 
     private boolean bIsFalling = false;
+    private boolean bCanFall   = true;
     private final int FallingFactor = 2; /* Basically its as same as Gravity */
 
     private void Falling()
     {
+        if (!bCanFall) return;
+
         // Only simulating when entity is not touching the ground
         if (!EntityOwner.IsOnGround())
         {
@@ -89,6 +92,7 @@ public class MovementComponent
             VelocityY   = 0;
             WasOnGround = true;
             bIsFalling  = false;
+            bCanFall    = true;
         }
     }
 
@@ -151,4 +155,5 @@ public class MovementComponent
     public void SetDeceleration(int Value) { Deceleration = Value; }
     public void SetMaxSpeed    (int Value) { MaxSpeed     = Value; }
     public void SetJumpStrength(int Value) { JumpStrength = -Value; }
+    public void SetCanFall     (boolean Value) { bCanFall = Value; }
 }
