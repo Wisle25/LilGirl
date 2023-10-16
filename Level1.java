@@ -4,8 +4,9 @@ public class Level1 extends UWorld
 {
     public Level1()
     {
-        super(3000, 1000, 1, 1000, 1000);
-
+        // real one
+        // super(1000, 1000, 1, 800, 500);
+        super(5000, 1000, 1, 800, 500);
         prepare();
     }
     
@@ -13,28 +14,63 @@ public class Level1 extends UWorld
     {
         Player M_Player = new Player();
         SetPlayer(M_Player, 500, 500);
-        M_Player.setLocation(120, 870);
+        M_Player.setLocation(20, 950);
 
         GreenfootImage bg = new GreenfootImage("images/Bg/bg1.png");
         SetScrollingBackground(bg);
 
-        AddObject(new Ground("platform1", 2, 2), 313,947);
-        AddObject(new Ground("platform22", 2, 2), 622,925);
-        AddObject(new Ground("platform22", 2, 2), 718,872);
-        AddObject(new Ground("platform3", 2, 2), 1076,893);
-        AddObject(new Ground("platform4", 2, 2), 1987,845);
-        AddObject(new Ground("platform5", 2, 2), 2904,654);
-        AddObject(new Ground("platform66", 2, 2), 3520,997);
-        AddObject(new Ground("platform7", 2, 2), 4098,237);
-        AddObject(new Ground("platformpinggir", 2, 2),  54, 776);
-        AddObject(new Ground("platforma1", 2, 2), 311,611);
-        AddObject(new Ground("platforma2", 2, 2), 539,612);
-        AddObject(new Ground("platforma2", 2, 2), 633,565);
-        AddObject(new Ground("platforma2", 2, 2), 727,518);
-        addObject(new Ground("platforma3", 2, 2), 1085,470);
-        addObject(new Ground("platforma4", 2, 2), 1485,400);
-        addObject(new Ground("platforma5", 2, 2), 1728,330);
-        addObject(new Ground("platforma6", 2, 2), 2039, 377);
+        AddObject(new Ground("platform1", 2), 86,989);
+        AddObject(new Ground("platform22", 2), 186,977);
+        AddObject(new Ground("platform22", 2), 218,960);
+        AddObject(new Ground("platform3", 2), 338,968);
+        AddObject(new Ground("platform4", 2), 641,952);
+        AddObject(new Ground("platform5", 2), 945,887);
+        AddObject(new Ground("platform7", 2), 1344,749);        
+        
+        AddObject(new Ground("platform8", 2), 1077, 866);  
+        AddObject(new Ground("platformj2", 2), 968, 761);              
+        AddObject(new Ground("platformj3", 2), 1015, 731);             
+        AddObject(new Ground("platformj4", 2), 918, 647);        
+        AddObject(new Ground("platformj4", 2), 918, 620);           
+        AddObject(new Ground("platformj4", 2), 918, 600);         
+      
+         
+    
+   
+       
+        AddObject(new Ground("platform9", 2), 873, 680);             
+        AddObject(new Ground("platform9", 2), 815, 518);           
+        AddObject(new Ground("platform10", 2), 737, 474);              
+        AddObject(new Ground("platform7a", 2), 1344,488);               
+        AddObject(new Ground("platform7a", 2), 1344,456);          
+        AddObject(new Ground("platform7a", 2), 1344,436);        
+      
+ 
+
+   
+ 
+   
+     
+        
+        
+        AddObject(new Ground("platformpinggir", 6.f, 160.f),  3, 899);
+        AddObject(new Ground("platforma1", 2), 88,812);
+        AddObject(new Ground("platforma2", 2), 165,812);
+        AddObject(new Ground("platforma2", 2), 196,797);
+        AddObject(new Ground("platforma2", 2), 227,782);
+        addObject(new Ground("platforma3", 2), 347,768);
+        addObject(new Ground("platforma4", 2), 480,744);
+        addObject(new Ground("platforma5", 2), 556,721);
+        addObject(new Ground("platforma6", 2), 659, 737);
+        AddObject(new Ground("platformp2", 2), 712,644);
+        AddObject(new Ground("platform8", 2), 750, 774);        
+        AddObject(new Ground("platformp3", 2), 785, 782);        
+        AddObject(new Ground("platformp3", 2), 785, 740);        
+        
+        AddObject(new Ground("platforma7", 2), 1037, 426);
+
+
+
     }
 }
 ;
