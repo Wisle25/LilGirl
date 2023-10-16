@@ -6,14 +6,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class LevelOne extends UWorld
+public class TestWorld extends UWorld
 {
 
     /**
      * Constructor for objects of class LevelOne.
      * 
      */
-    public LevelOne()
+    public TestWorld()
     {
         super(1080, 1080, 1, 5000, 1000);
 
