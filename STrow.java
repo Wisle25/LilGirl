@@ -41,13 +41,13 @@ public class STrow extends Environment
 
         boolean bShootEach = World.GetTimerManager().IsTimerFinished("EachShootTimer");
 
-        if (bShootEach && Count > 0)
+        if (bShootEach && Count < 3)
         {
             World.AddObject(Shurikens[Count++], getX(), getY());
 
             World.GetTimerManager().StartTimer("EachShootTimer", EachShootTimer);
         }
-        else if (bShootEach && Count == 2)
+        else if (bShootEach && Count == 3)
         {
             Count = 0;
 
