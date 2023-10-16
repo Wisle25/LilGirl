@@ -4,7 +4,7 @@ public class Level1 extends UWorld
 {
     public Level1()
     {
-        super(6000, 1000, 1, 1000, 1000);
+        super(3000, 1000, 1, 1000, 1000);
 
         prepare();
     }
@@ -18,23 +18,23 @@ public class Level1 extends UWorld
         GreenfootImage bg = new GreenfootImage("images/Bg/bg1.png");
         SetScrollingBackground(bg);
 
-        Platform2 platform2 = new Platform2();
-        AddObject(platform2,313,947);
-
-        PlatformTAngga platformTAngga = new PlatformTAngga();
-        AddObject(platformTAngga,622,925);
-        PlatformTAngga platformTAngga2 = new PlatformTAngga();
-        AddObject(platformTAngga2,718,872);
-        Platform3 platform3 = new Platform3();
-        AddObject(platform3,1076,893);
-        Platform4 platform4 = new Platform4();
-        AddObject(platform4,1987,845);
-        Platform5 platform5 = new Platform5();
-        addObject(platform5,2904,654);
-        Platform6 platform6 = new Platform6();
-        addObject(platform6,3520,997);
-        Platform7 platform7 = new Platform7();
-        addObject(platform7,4098,237);
+        AddObject(new Ground("platform1", 2, 2), 313,947);
+        AddObject(new Ground("platform22", 2, 2), 622,925);
+        AddObject(new Ground("platform22", 2, 2), 718,872);
+        AddObject(new Ground("platform3", 2, 2), 1076,893);
+        AddObject(new Ground("platform4", 2, 2), 1987,845);
+        AddObject(new Ground("platform5", 2, 2), 2904,654);
+        AddObject(new Ground("platform66", 2, 2), 3520,997);
+        AddObject(new Ground("platform7", 2, 2), 4098,237);
+        AddObject(new Ground("platformpinggir", 2, 2),  54, 776);
+        AddObject(new Ground("platforma1", 2, 2), 311,611);
+        AddObject(new Ground("platforma2", 2, 2), 539,612);
+        AddObject(new Ground("platforma2", 2, 2), 633,565);
+        AddObject(new Ground("platforma2", 2, 2), 727,518);
+        addObject(new Ground("platforma3", 2, 2), 1085,470);
+        addObject(new Ground("platforma4", 2, 2), 1485,400);
+        addObject(new Ground("platforma5", 2, 2), 1728,330);
+        addObject(new Ground("platforma6", 2, 2), 2039, 377);
     }
 }
 ;

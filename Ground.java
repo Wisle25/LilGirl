@@ -13,7 +13,7 @@ public class Ground extends Environment
         String Path   = "Tiles/";
 
         setImage(Path + TilesName + ".png");
-        getImage().scale(ScaleX, ScaleY);
+        getImage().scale(getImage().getWidth() / ScaleX, getImage().getHeight() / ScaleY);
         
         setRotation(Rotation);
     }
@@ -23,6 +23,6 @@ public class Ground extends Environment
         String Path   = "Tiles/";
 
         setImage(Path + TilesName + ".png");
-        getImage().scale(ScaleX, ScaleY);        
+        getImage().scale(getImage().getWidth() / ScaleX, getImage().getHeight() / ScaleY);        
     }
 }

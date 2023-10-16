@@ -66,7 +66,7 @@ public class AnimationComponent
     public void SetScale(int NewScale)
     {
         for (GreenfootImage Frame : Frames)
-            Frame.scale(NewScale, NewScale);
+            Frame.scale(Frame.getWidth() / NewScale, Frame.getHeight() / NewScale);
     }
 
     // ----- Properties ----- //

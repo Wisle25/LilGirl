@@ -18,19 +18,24 @@ public class Player extends Entity
 
         // Adding idle pose as default anim
         setImage("images/Barudak/Idle/idle1.png");
+        getImage().scale(getImage().getWidth() / 2, getImage().getHeight() / 2);
 
         // Adding animation
         String Path = "images/Barudak/";
 
         Animations.put(EntityState.IDLE, new AnimationComponent(this, Path + "Idle", 15));
-        Animations.put(EntityState.WALK, new AnimationComponent(this, Path + "Walk", 10));
-        Animations.put(EntityState.RUN, new AnimationComponent(this, Path + "Run", 8));
+        Animations.put(EntityState.WALK, new AnimationComponent(this, Path + "Walk", 7));
+        Animations.put(EntityState.RUN, new AnimationComponent(this, Path + "Run", 4));
         Animations.put(EntityState.FALL, new AnimationComponent(this, Path + "Jump", 5));
-        Animations.put(EntityState.DIE, new AnimationComponent(this, Path + "Die", 10));
+        Animations.put(EntityState.DIE, new AnimationComponent(this, Path + "Die", 9));
 
         // Edit some properties
         Animations.get(EntityState.FALL).SetPauseAtEnd(true);
         Animations.get(EntityState.DIE) .SetPauseAtEnd(true);
+
+        Animations.forEach((Key, Value) -> {
+            Value.SetScale(2);
+        });
     }
 
     @Override
@@ -38,13 +43,13 @@ public class Player extends Entity
     {
         super.SetupMovement();
 
-        WalkSpeed = 3;
-        RunSpeed  = 7;
+        WalkSpeed = 1;
+        RunSpeed  = 4;
 
-        Movement.SetAcceleration(15);
-        Movement.SetDeceleration(20);
+        Movement.SetAcceleration(7);
+        Movement.SetDeceleration(11);
         Movement.SetMaxSpeed(RunSpeed);
-        Movement.SetJumpStrength(15);
+        Movement.SetJumpStrength(6);
     }
 
     @Override

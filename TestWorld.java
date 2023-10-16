@@ -35,12 +35,6 @@ public class TestWorld extends UWorld
         Gear gear = new Gear();
         AddObject(gear,368,695);
 
-        Platform1 platform1 = new Platform1();
-        AddObject(platform1,132,851);
-
-        Platform1 platform2 = new Platform1();
-        AddObject(platform2,264,851);
-
         AddObject(new STrow(0, 10), 264, 820);
     }
 }
