@@ -6,7 +6,6 @@ public class Gear extends Obstacle
     {
         setImage("images/Traps/Gear/1.png");
 
-        Anim = new AnimationComponent(this, "images/Traps/Gear" , 3);
-        Anim.SetScale(100);
+        Anim = new AnimationComponent(this, "images/Traps/Gear" , 2);
     }
 }

@@ -11,6 +11,7 @@ public class Obstacle extends Environment
     // ----- Components ---------- //
 
     protected AnimationComponent Anim;
+    private Effects BloodSplash = new Effects("BloodSplash", 1);
 
     // ----- Combat ---------- //
 
@@ -30,7 +31,10 @@ public class Obstacle extends Environment
             Character.ReceiveDamage(Damage);
 
             // Start new timer
-            World.GetTimerManager().StartTimer("Damaging", 20);
+            World.GetTimerManager().StartTimer("Damaging", 7);
+
+            // Spawn a effect
+            World.AddObject(BloodSplash, Character.getX(), Character.getY());
         }
     }
 }
