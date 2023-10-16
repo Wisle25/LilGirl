@@ -10,9 +10,9 @@ public class Ground extends Environment
 
     public Ground(String TilesName, int Rotation, int ScaleX, int ScaleY)
     {
-        String Path   = "/images/Tiles/";
+        String Path   = "Tiles/";
 
-        setImage(Path + TilesName);
+        setImage(Path + TilesName + ".png");
         getImage().scale(ScaleX, ScaleY);
         
         setRotation(Rotation);
@@ -20,9 +20,9 @@ public class Ground extends Environment
 
     public Ground(String TilesName, int ScaleX, int ScaleY)
     {
-        String Path   = "/images/Tiles/";
+        String Path   = "Tiles/";
 
-        setImage(Path + TilesName);
+        setImage(Path + TilesName + ".png");
         getImage().scale(ScaleX, ScaleY);        
     }
 }
