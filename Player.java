@@ -18,7 +18,6 @@ public class Player extends Entity
 
         // Adding idle pose as default anim
         setImage("images/Barudak/Idle/idle1.png");
-        getImage().scale(getImage().getWidth() / 2, getImage().getHeight() / 2);
 
         // Adding animation
         String Path = "images/Barudak/";
@@ -33,9 +32,9 @@ public class Player extends Entity
         Animations.get(EntityState.FALL).SetPauseAtEnd(true);
         Animations.get(EntityState.DIE) .SetPauseAtEnd(true);
 
-        Animations.forEach((Key, Value) -> {
-            Value.SetScale(2);
-        });
+        // Animations.forEach((Key, Value) -> {
+        //     Value.SetScale(2);
+        // });
     }
 
     @Override

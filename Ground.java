@@ -23,7 +23,6 @@ public class Ground extends Environment
         String Path   = "Tiles/";
 
         setImage(Path + TilesName + ".png");
-        // getImage().scale(getImage().getWidth() / Scale, getImage().getHeight() / Scale);
         
         int newWidth = (int) (getImage().getWidth() / Scale);
         int newHeight = (int) (getImage().getHeight() / Scale);
