@@ -5,7 +5,9 @@ public class Level1 extends UWorld
     public Level1()
     {
         // real one
-        super(800, 600, 1, 2500, 1500);
+        // super(800, 600, 1, 2500, 1500);        
+        super(2000, 600, 1, 2500, 1500);
+
         // super(5000, 1000, 1, 800, 500);
         prepare();
     }
@@ -20,22 +22,22 @@ public class Level1 extends UWorld
         SetScrollingBackground(bg);
 
         // Ground
-        AddObject(new Ground("platform1", 0.9), 86,489);
-        AddObject(new Ground("platform22", 0.9), 186,477);
-        AddObject(new Ground("platform22", 0.9), 218,460);
-        AddObject(new Ground("platform3", 0.9), 338,468);
-        AddObject(new Ground("platform4", 0.9), 641,452);
-        AddObject(new Ground("platform5", 0.9), 945,387);
-        AddObject(new Ground("platform7", 0.9), 1344,249);        
+        AddObject(new Ground("platform1", 0.9), 86 + 110,489 + 86);
+        AddObject(new Ground("platform22", 0.9), 427,555);
+        AddObject(new Ground("platform22", 0.9), 497,518);
+        AddObject(new Ground("platform3", 0.9), 764,534);
+        AddObject(new Ground("platform4", 0.9), 641 + 110,452 + 86);
+        AddObject(new Ground("platform5", 0.9), 945 + 110,387 + 86);
+        AddObject(new Ground("platform7", 0.9), 1344 + 110,249 + 86);        
 
-        AddObject(new Ground("platform8", 0.9), 1077, 366);  
-        AddObject(new Ground("platformj2", 0.9), 968, 261);              
-        AddObject(new Ground("platformj3", 0.9), 1015, 231);             
-        AddObject(new Ground("platformj4", 0.9), 918, 147);        
-        AddObject(new Ground("platformj4", 0.9), 918, 97);        
-        AddObject(new Ground("platformj4", 0.9), 918, 47);         
-        AddObject(new Ground("platformj4", 0.9), 958, 122);        
-        AddObject(new Ground("platformj4", 0.9), 958, 72);           
+        AddObject(new Ground("platform8", 0.9), 1077 + 110, 366);  
+        AddObject(new Ground("platformj2", 0.9), 968 + 110, 261);              
+        AddObject(new Ground("platformj3", 0.9), 1015 + 110, 231);             
+        AddObject(new Ground("platformj4", 0.9), 918 + 110, 147);        
+        AddObject(new Ground("platformj4", 0.9), 918 + 110, 97);        
+        AddObject(new Ground("platformj4", 0.9), 918 + 110, 47);         
+        AddObject(new Ground("platformj4", 0.9), 958 + 110, 122);        
+        AddObject(new Ground("platformj4", 0.9), 958 + 110, 72);           
 
         AddObject(new Ground("platform9", 0.9), 873, 180);             
         AddObject(new Ground("platform9", 0.9), 815, 18);           
