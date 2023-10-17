@@ -6,7 +6,7 @@ public class Level1 extends UWorld
     {
         // real one
         // super(800, 600, 1, 2500, 1500);        
-        super(2000, 600, 1, 2500, 1500);
+        super(5000, 1800, 1, 2500, 1500);
 
         // super(5000, 1000, 1, 800, 500);
         prepare();
@@ -22,57 +22,56 @@ public class Level1 extends UWorld
         SetScrollingBackground(bg);
 
         // Ground
-        AddObject(new Ground("platform1", 0.9), 86 + 110,489 + 86);
-        AddObject(new Ground("platform22", 0.9), 427,555);
-        AddObject(new Ground("platform22", 0.9), 497,518);
-        AddObject(new Ground("platform3", 0.9), 764,534);
-        AddObject(new Ground("platform4", 0.9), 641 + 110,452 + 86);
-        AddObject(new Ground("platform5", 0.9), 945 + 110,387 + 86);
-        AddObject(new Ground("platform7", 0.9), 1344 + 110,249 + 86);        
+        AddObject(new Ground("platform1", 0.9), 86 + 110,489 + 86 +900);
+        AddObject(new Ground("platform22", 0.9), 427,555 + 900);
+        AddObject(new Ground("platform22", 0.9), 497,518 + 900);
+        AddObject(new Ground("platform3", 0.9), 764,534 + 900);
+        AddObject(new Ground("platform4", 0.9), 1439,498 + 900);
+        AddObject(new Ground("platform5", 0.9), 2117,356 + 900);
+        AddObject(new Ground("platform7", 0.9), 2989,49 + 900);        
 
-        AddObject(new Ground("platform8", 0.9), 1077 + 110, 366);  
-        AddObject(new Ground("platformj2", 0.9), 968 + 110, 261);              
-        AddObject(new Ground("platformj3", 0.9), 1015 + 110, 231);             
-        AddObject(new Ground("platformj4", 0.9), 918 + 110, 147);        
-        AddObject(new Ground("platformj4", 0.9), 918 + 110, 97);        
-        AddObject(new Ground("platformj4", 0.9), 918 + 110, 47);         
-        AddObject(new Ground("platformj4", 0.9), 958 + 110, 122);        
-        AddObject(new Ground("platformj4", 0.9), 958 + 110, 72);           
+        AddObject(new Ground("platform8", 0.9), 2416, 308 + 900);  
+        AddObject(new Ground("platformj2", 0.9), 2112, 31 + 900);              
+        AddObject(new Ground("platformj3", 0.9), 2232, -47 + 900);             
+        AddObject(new Ground("platformj4", 0.9), 2180, -192 + 900);        
+        AddObject(new Ground("platformj4", 0.9), 2320, -268 + 900);        
+        AddObject(new Ground("platformj4", 0.9), 2250, -228 + 900);         
+        AddObject(new Ground("platformj4", 0.9), 2250, -370 + 900);        
+        AddObject(new Ground("platformj4", 0.9), 2180, -410 + 900);           
 
-        AddObject(new Ground("platform9", 0.9), 873, 180);             
-        AddObject(new Ground("platform9", 0.9), 815, 18);           
-        AddObject(new Ground("platform10", 0.9), 737, -74);              
-        AddObject(new Ground("platform7a", 0.9), 1344, -88);               
-        AddObject(new Ground("platform7a", 0.9), 1344, -56);          
-        AddObject(new Ground("platform7a", 0.9), 1344, -36);        
+        AddObject(new Ground("platform9", 0.9), 1935, -154 + 900);              
+        AddObject(new Ground("platform9", 0.9), 1802, -366 + 900);           
+        AddObject(new Ground("platform9", 0.9), 2598, -317 + 900);             
+        AddObject(new Ground("platform10", 0.9), 1629, -451 + 900);              
+        AddObject(new Ground("platform7a", 0.9), 2989, -504 + 900);               
 
-        AddObject(new Ground("platformpinggir", 0.9),  3, 399);
-        AddObject(new Ground("platforma1", 0.9), 88,312);
-        AddObject(new Ground("platforma2", 0.9), 165,312);
-        AddObject(new Ground("platforma2", 0.9), 196,297);
-        AddObject(new Ground("platforma2", 0.9), 227,282);
-        AddObject(new Ground("platforma3", 0.9), 347, 268);
-        AddObject(new Ground("platforma4", 0.9), 480, 244);
-        AddObject(new Ground("platforma5", 0.9), 556, 221);
-        AddObject(new Ground("platforma6", 0.9), 659, 237);
-        AddObject(new Ground("platformp2", 0.9), 712,144);
-        AddObject(new Ground("platform8", 0.9), 750, 274);        
-        AddObject(new Ground("platformp3", 0.9), 785, 282);        
-        AddObject(new Ground("platformp3", 0.9), 785, 240);        
+        AddObject(new Ground("platformpinggir", 0.75),  6, 428 + 900);
+        AddObject(new Ground("platforma1", 0.9), 195,286 + 900);
+        AddObject(new Ground("platforma2", 0.9), 433,252 + 900);
+        AddObject(new Ground("platforma2", 0.9), 501,218 + 900);
+        AddObject(new Ground("platforma2", 0.9), 363,286 + 900);
+        AddObject(new Ground("platforma3", 0.9), 765, 184 + 900);
+        AddObject(new Ground("platforma4", 0.9), 1061, 133 + 900);
+        AddObject(new Ground("platforma5", 0.9), 1230, 81 + 900);
+        AddObject(new Ground("platforma6", 0.9), 1458, 116 + 900);
+        AddObject(new Ground("platformp2", 0.9), 1574,-88 + 900);
+        AddObject(new Ground("platform8", 0.9), 1665, 203 + 900);        
+        AddObject(new Ground("platformp3", 0.9), 1739, 133 + 900);        
+        AddObject(new Ground("platformp3", 0.9), 1739, -10 + 900);        
 
-        AddObject(new Ground("platforma7", 0.9), 1037, -26);
+        AddObject(new Ground("platforma7", 0.9), 2295, -556 + 900);
 
         // // Environment
-        // Environment door = new Environment("doorlocked", 1.2);
-        // AddObject(door, 56, 955);
+        // Environment door = new Environment("doorlocked", 1.2 + 900);
+        // AddObject(door, 56, 955 + 900);
 
-        AddObject(new Spike(false), 116, 474);
-        AddObject(new Spike(false), 294, 421);
-        AddObject(new Spike(false), 310, 421);
+        AddObject(new Spike(false), 116, 474 + 900);
+        AddObject(new Spike(false), 294, 421 + 900);
+        AddObject(new Spike(false), 310, 421 + 900);
 
-        AddObject(new Spike(false), 538, 388);
-        AddObject(new Spike(false), 560, 388);        
-        AddObject(new Spike(false), 575, 388);
-        AddObject(new STrow(90, 5), 654, 269);
+        AddObject(new Spike(false), 538, 388 + 900);
+        AddObject(new Spike(false), 560, 388 + 900);        
+        AddObject(new Spike(false), 575, 388 + 900);
+        AddObject(new STrow(90, 5), 654, 269 + 900);
     }
 }
