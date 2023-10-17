@@ -40,6 +40,11 @@ public class Entity extends Actor
         if (Animations.containsKey(EState))
             Animations.get(EState).Setup();
     }
+    
+    public boolean StateEqualTo(EntityState Value)
+    {
+        return EState == Value;
+    }
 
     protected void HandleState()
     {
@@ -88,20 +93,20 @@ public class Entity extends Actor
 
     public boolean CheckRight()
     {
-        return getOneObjectAtOffset(getImage().getWidth()/2 + 1, 0, Environment.class) != null;
+        return getOneObjectAtOffset(getImage().getWidth()/2, 0, Environment.class) != null;
     }
 
     public boolean CheckLeft()
     {
-        return getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Environment.class) != null;
+        return getOneObjectAtOffset(-getImage().getWidth() / 2, 0, Environment.class) != null;
     }
 
-    public boolean Crawling()
+    public int IsCrawling()
     {
-        boolean Left = getOneObjectAtOffset(getImage().getWidth() / 2 + 1, 0, Ground.class) != null;
-        boolean Right = getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Ground.class) != null;
+        boolean Left = getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Ground.class) != null;
+        boolean Right = getOneObjectAtOffset(getImage().getWidth() / 2 + 1, 0, Ground.class) != null;
 
-        return Left || Right;
+        return Left ? -1 : Right ? 1 : 0;
     }
 
     public boolean IsOnGround()

@@ -25,8 +25,9 @@ public class Player extends Entity
         Animations.put(EntityState.IDLE, new AnimationComponent(this, Path + "Idle", 15));
         Animations.put(EntityState.WALK, new AnimationComponent(this, Path + "Walk", 7));
         Animations.put(EntityState.RUN, new AnimationComponent(this, Path + "Run", 4));
-        Animations.put(EntityState.FALL, new AnimationComponent(this, Path + "Jump", 5));
+        Animations.put(EntityState.FALL, new AnimationComponent(this, Path + "Jump", 1));
         Animations.put(EntityState.DIE, new AnimationComponent(this, Path + "Die", 9));
+        Animations.put(EntityState.CRAWLING, new AnimationComponent(this, Path + "Crawl", 1));
 
         // Edit some properties
         Animations.get(EntityState.FALL).SetPauseAtEnd(true);
@@ -42,13 +43,13 @@ public class Player extends Entity
     {
         super.SetupMovement();
 
-        WalkSpeed = 1;
-        RunSpeed  = 4;
+        WalkSpeed = 3;
+        RunSpeed  = 6;
 
-        Movement.SetAcceleration(7);
-        Movement.SetDeceleration(11);
+        Movement.SetAcceleration(8);
+        Movement.SetDeceleration(15);
         Movement.SetMaxSpeed(RunSpeed);
-        Movement.SetJumpStrength(11);
+        Movement.SetJumpStrength(15);
     }
 
     @Override
@@ -105,9 +106,10 @@ public class Player extends Entity
 
         int Speed = Math.abs(Movement.GetVelocity());
         
-        if      (Movement.IsFalling()) SetState(EntityState.FALL);
-        else if (Speed == 0)           SetState(EntityState.IDLE);
-        else if (0 < Speed && Speed <= WalkSpeed)         SetState(EntityState.WALK);
-        else if (WalkSpeed < Speed && Speed <= RunSpeed)  SetState(EntityState.RUN);
+        if      (IsCrawling() != 0 && !IsOnGround())     SetState(EntityState.CRAWLING);
+        else if (Movement.IsFalling())                   SetState(EntityState.FALL);
+        else if (Speed == 0)                             SetState(EntityState.IDLE);
+        else if (0 < Speed && Speed <= WalkSpeed)        SetState(EntityState.WALK);
+        else if (WalkSpeed < Speed && Speed <= RunSpeed) SetState(EntityState.RUN);
     }
 }

@@ -27,6 +27,7 @@ public class MovementComponent
     private int VelocityX;
     private int VelocityY;
     private int MaxSpeed;
+    private int Delta;
 
     private int Acceleration;
     private int Deceleration;
@@ -38,7 +39,8 @@ public class MovementComponent
     /* Use this instead of "move" to move an entity */
     public void AddVelocity(int Factor)
     {
-        VelocityX = VelocityX + Acceleration * Factor;
+        Delta     = Factor;
+        VelocityX = VelocityX + Acceleration * Delta;
 
         // Clamping the velocity if it reaches the MaxSpeed
         if (VelocityX >= MaxSpeed)  VelocityX = MaxSpeed;
@@ -48,19 +50,27 @@ public class MovementComponent
     }
 
     public void Jump()
-    {
-        if (!CanJump()) return;
-        
-        VelocityY = JumpStrength;
-        EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+    {      
+        if (CanJump())
+        {
+            VelocityY = JumpStrength;
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+        }
+        else if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && Delta != EntityOwner.IsCrawling()) // Wall Jump
+        {
+            VelocityY = JumpStrength;
+            VelocityX = 20 * Delta;
+
+            EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY() + VelocityY);
+        }
     }
 
     public boolean CanJump()
     {
         UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
-        boolean Coyote   = !World.GetTimerManager().IsTimerFinished("CoyoteTimer"); 
-        boolean bCanJump = EntityOwner.IsOnGround() ? true : (Coyote && WasOnGround) /*|| EntityOwner.Crawling()*/;
+        boolean Coyote   = !World.GetTimerManager().IsTimerFinished("CoyoteTimer") && WasOnGround; 
+        boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
 
         return bCanJump;
     }
@@ -73,21 +83,21 @@ public class MovementComponent
     private void Falling()
     {
         // Only simulating when entity is not touching the ground
-        if (!EntityOwner.IsOnGround())
+        if (EntityOwner.IsCrawling() != 0 && !EntityOwner.IsOnGround())
+        {
+            // Constant velocity
+            final int ConstVal = 2;
+            VelocityY          = ConstVal;
+
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+        }
+        else if (!EntityOwner.IsOnGround())
         {
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
 
             bIsFalling = true;
             VelocityY += FallingFactor;
         }
-        // else if (EntityOwner.Crawling())
-        // {
-        //     // Constant velocity
-        //     final int ConstVal = 1;
-        //     VelocityY          = ConstVal;
-
-        //     EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
-        // }
         else if (EntityOwner.IsOnGround() && bIsFalling)
         {   
             // Fix the landing position

@@ -8,8 +8,8 @@ public class STrow extends Environment
         setRotation(Rotation);
         CreateShuriken(Rotation, Speed);
 
-        int newWidth  = (int)(getImage().getWidth() / 3);
-        int newHeight = (int)(getImage().getHeight() / 3);
+        int newWidth  = (int)(getImage().getWidth() * 2);
+        int newHeight = (int)(getImage().getHeight() * 2);
         
         getImage().scale(newWidth, newHeight);
     }

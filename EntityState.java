@@ -4,5 +4,6 @@ public enum EntityState
     WALK,
     RUN,
     FALL,
+    CRAWLING,
     DIE
 }
