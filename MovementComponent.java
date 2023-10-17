@@ -49,12 +49,15 @@ public class MovementComponent
         EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY());
     }
 
-    public void Jump()
+    /* Returning boolean to see is the jumping success */
+    public boolean Jump()
     {      
         if (CanJump())
         {
             VelocityY = JumpStrength;
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+
+            return true;
         }
         else if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && Delta != EntityOwner.IsCrawling()) // Wall Jump
         {
@@ -62,7 +65,11 @@ public class MovementComponent
             VelocityX = 20 * Delta;
 
             EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY() + VelocityY);
+
+            return true;
         }
+
+        return false;
     }
 
     public boolean CanJump()
