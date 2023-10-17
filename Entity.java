@@ -96,6 +96,14 @@ public class Entity extends Actor
         return getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Environment.class) != null;
     }
 
+    public boolean Crawling()
+    {
+        boolean Left = getOneObjectAtOffset(getImage().getWidth() / 2 + 1, 0, Ground.class) != null;
+        boolean Right = getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Ground.class) != null;
+
+        return Left || Right;
+    }
+
     public boolean IsOnGround()
     {
         Actor Ground = getOneObjectAtOffset(0, getImage().getHeight() / 2, Ground.class);

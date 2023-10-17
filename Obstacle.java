@@ -5,7 +5,7 @@ public class Obstacle extends Environment
     public void act()
     {
         if (Anim != null) Anim.TickComponent();
-        Damaging();
+        // Damaging();
     }
 
     // ----- Components ---------- //
@@ -33,8 +33,8 @@ public class Obstacle extends Environment
             // Start new timer
             World.GetTimerManager().StartTimer("Damaging", 7);
 
-            // Spawn a effect
-            World.AddObject(BloodSplash, Character.getX(), Character.getY());
+            // Spawn blood effect
+            World.addObject(BloodSplash, Character.getX(), Character.getY());
         }
     }
 }

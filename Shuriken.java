@@ -1,14 +1,13 @@
-import greenfoot.Actor;
-
 public class Shuriken extends Obstacle
 {
     // ----- Lifecycle ---------- //
 
     public Shuriken(int Rotation, int Speed)
     {
-        Anim       = new AnimationComponent(this, "images/Traps/Shuriken/Shuriken", 5);
-        Anim.SetScale(10);
-        this.Speed = Speed;
+        Anim        = new AnimationComponent(this, "images/Traps/Shuriken/Shuriken", 2);
+        Anim.SetScale(80);
+        
+        this.Speed  = Speed;
         this.Damage = 15;
 
         setRotation(Rotation);
@@ -29,9 +28,10 @@ public class Shuriken extends Obstacle
 
     private void Shoot()
     {
-        Actor Player = getOneIntersectingObject(Player.class);
+        boolean Player = getOneIntersectingObject(Player.class) != null;
+        boolean Ground = getOneIntersectingObject(Ground.class) != null;
 
-        if (Player != null)
+        if (Player || Ground)
         {
             getWorldOfType(UWorld.class).RemoveObject(this);
 
@@ -51,5 +51,4 @@ public class Shuriken extends Obstacle
             World.RemoveObject(this);
         }
     }
-
 }

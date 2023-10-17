@@ -60,7 +60,7 @@ public class MovementComponent
         UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
         boolean Coyote   = !World.GetTimerManager().IsTimerFinished("CoyoteTimer"); 
-        boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
+        boolean bCanJump = EntityOwner.IsOnGround() ? true : (Coyote && WasOnGround) /*|| EntityOwner.Crawling()*/;
 
         return bCanJump;
     }
@@ -68,21 +68,26 @@ public class MovementComponent
     // ----- Handler ---------- //
 
     private boolean bIsFalling = false;
-    private boolean bCanFall   = true;
     private final int FallingFactor = 2; /* Basically its as same as Gravity */
 
     private void Falling()
     {
-        if (!bCanFall) return;
-
         // Only simulating when entity is not touching the ground
         if (!EntityOwner.IsOnGround())
         {
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
 
             bIsFalling = true;
-            VelocityY = VelocityY + FallingFactor;
+            VelocityY += FallingFactor;
         }
+        // else if (EntityOwner.Crawling())
+        // {
+        //     // Constant velocity
+        //     final int ConstVal = 1;
+        //     VelocityY          = ConstVal;
+
+        //     EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+        // }
         else if (EntityOwner.IsOnGround() && bIsFalling)
         {   
             // Fix the landing position
@@ -92,7 +97,6 @@ public class MovementComponent
             VelocityY   = 0;
             WasOnGround = true;
             bIsFalling  = false;
-            bCanFall    = true;
         }
     }
 
@@ -155,5 +159,4 @@ public class MovementComponent
     public void SetDeceleration(int Value) { Deceleration = Value; }
     public void SetMaxSpeed    (int Value) { MaxSpeed     = Value; }
     public void SetJumpStrength(int Value) { JumpStrength = -Value; }
-    public void SetCanFall     (boolean Value) { bCanFall = Value; }
 }
