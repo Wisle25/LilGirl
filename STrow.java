@@ -5,9 +5,13 @@ public class STrow extends Environment
     public STrow(int Rotation, int Speed)
     {
         setImage("images/Traps/Shuriken/STrow.png");
-        getImage().scale(20, 20);
         setRotation(Rotation);
         CreateShuriken(Rotation, Speed);
+
+        int newWidth  = (int)(getImage().getWidth() / 3);
+        int newHeight = (int)(getImage().getHeight() / 3);
+        
+        getImage().scale(newWidth, newHeight);
     }
 
     public void act()

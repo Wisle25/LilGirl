@@ -13,6 +13,14 @@ public class Obstacle extends Environment
     protected AnimationComponent Anim;
     private Effects BloodSplash = new Effects("BloodSplash", 1);
 
+    protected void SetScale(double Value)
+    {
+        int newWidth  = (int)(getImage().getWidth() / Value);
+        int newHeight = (int)(getImage().getHeight() / Value);
+        
+        getImage().scale(newWidth, newHeight);
+    }
+
     // ----- Combat ---------- //
 
     protected int Damage = 20;

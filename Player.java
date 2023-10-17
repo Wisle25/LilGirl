@@ -32,9 +32,9 @@ public class Player extends Entity
         Animations.get(EntityState.FALL).SetPauseAtEnd(true);
         Animations.get(EntityState.DIE) .SetPauseAtEnd(true);
 
-        // Animations.forEach((Key, Value) -> {
-        //     Value.SetScale(2);
-        // });
+        Animations.forEach((Key, Value) -> {
+            Value.SetScale(1.2);
+        });
     }
 
     @Override

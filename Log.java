@@ -5,7 +5,7 @@ public class Log extends Obstacle
     public Log()
     {
         setImage("images/Traps/Log.png");
-        getImage().scale(getImage().getWidth() / 2, getImage().getHeight() / 2);
+        SetScale(2);
     }
 
     public void act()
