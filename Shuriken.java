@@ -24,7 +24,7 @@ public class Shuriken extends Obstacle
 
     private int Speed;
     private int Distance    = 0;
-    private int MaxDistance = 250;
+    private int MaxDistance = 300;
 
     private void Shoot()
     {

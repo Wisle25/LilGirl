@@ -18,23 +18,30 @@ public class Level1 extends UWorld
         Decoration door = new Decoration("doorlocked", 0.85);
         AddObject(door, 76, 518 + 900);
 
-        AddObject(new Decoration("torch", 0.85), 134, 462 + 900);       
-        AddObject(new Decoration("torch"), 440, 397 + 900);       
-
-        AddObject(new Decoration("jendela", 0.85), 706, 352 + 900);
-        AddObject(new Ground("jendelat", 0.85), 706, 379 + 900);
-        AddObject(new Decoration("torch", 0.85), 755, 365 + 900);
+        AddObject(new Decoration("torch", 0.85), 134, 462 + 900);         
+        AddObject(new Ground("kendi", 0.8), 346, 540 + 900);       
+      
+        AddObject(new Decoration("torch"), 440, 397 + 900);          
+        AddObject(new Ground("box", 0.8), 516, 467 + 900);       
         
-        AddObject(new Decoration("jendela", 0.85), 1146, 268 + 900);
-        AddObject(new Ground("jendelat", 0.85), 1146, 300 + 900);
-
-        AddObject(new Decoration("jendela", 0.85), 1280, 268 + 900);
-        AddObject(new Ground("jendelat", 0.85), 1280, 300 + 900);
+        AddObject(new Decoration("jendela", 0.85), 706, 352 + 900);
+        AddObject(new Ground("JENDELAT", 0.85), 706, 379 + 900);
+        AddObject(new Decoration("torch", 0.85), 755, 365 + 900);
+        AddObject(new Ground("box", 0.8), 918, 430 + 900);       
+        AddObject(new Decoration("jendela", 0.85), 930, 352 + 900);
+        AddObject(new Ground("JENDELAT", 0.85), 930, 379 + 900);
+        
+        AddObject(new Decoration("jendela", 0.85), 1161, 268 + 900);
+        AddObject(new Ground("JENDELAT", 0.85), 1161, 300 + 900);
+        
+        AddObject(new Decoration("jendela", 0.85), 1295, 268 + 900);
+        AddObject(new Ground("JENDELAT", 0.85), 1295, 300 + 900);
+        // AddObject(new Gear(), getHeight(), getCellSize());
 
         // Player
         Player M_Player = new Player();
         SetPlayer(M_Player, 700, 400);
-        M_Player.setLocation(1280, 250 + 900);
+        M_Player.setLocation(2300, 30 + 900);
 
         // BG
         GreenfootImage bg = new GreenfootImage("images/Bg/bg1.png");
@@ -44,13 +51,7 @@ public class Level1 extends UWorld
         
         // Obsctacles 
         AddObject(new Spike(false), 237, 544 + 900);
-        // Spike Spikemv1 = new Spike(true);        
-        // Spike Spikemv2 = new Spike(true);
-
-        // Spikemv1.SetDefaultLocation(733, 432 + 900);        
-        // Spikemv2.SetDefaultLocation(700, 432 + 900);
-        // AddObject(Spikemv1, 733, 432 + 900);
-        // AddObject(Spikemv2, 700, 432 + 900);
+        
 
         AddObject(new Spike(), 733, 432 + 900);
         AddObject(new Spike(), 700, 432 + 900);
@@ -58,7 +59,21 @@ public class Level1 extends UWorld
         AddObject(new Spike(false), 1154, 361 + 900);
         AddObject(new Spike(false), 1229, 361 + 900);        
         AddObject(new Spike(false), 1304, 361 + 900);
+        AddObject(new Spike(false), 1691, 189+ 900);
+        AddObject(new Spike(false), 1640, 189+ 900);        
+        AddObject(new Spike(false), 2392, 297+ 900);
+        AddObject(new Spike(false), 2442 , 297+ 900);
+
+
+
         AddObject(new STrow(90, 5), 1489, 189 + 900);
+
+        AddObject(new STrow(90, 5), 1815, 30 + 900);
+
+        Spike Spikemv1 = new Spike(true);        
+
+        Spikemv1.SetDefaultLocation(2334, -137 + 900);        
+        AddObject(Spikemv1, 2334, -137 + 900);
 
         // Ground
         AddObject(new Ground("platform1", 0.9), 86 + 110, 489 + 86 + 900);
@@ -69,18 +84,36 @@ public class Level1 extends UWorld
         AddObject(new Ground("platform5", 0.9), 2117,356 + 900);
         AddObject(new Ground("platform7", 0.9), 2989,49 + 900);        
 
-        AddObject(new Ground("platform8", 0.9), 2416, 308 + 900);  
-        AddObject(new Ground("platformj2", 0.9), 2112, 31 + 900);              
-        AddObject(new Ground("platformj3", 0.9), 2232, -47 + 900);             
-        AddObject(new Ground("platformj4", 0.9), 2180, -192 + 900);        
-        AddObject(new Ground("platformj4", 0.9), 2320, -268 + 900);        
-        AddObject(new Ground("platformj4", 0.9), 2250, -228 + 900);         
-        AddObject(new Ground("platformj4", 0.9), 2250, -370 + 900);        
+        AddObject(new Ground("platformj2", 0.9), 2412, 315 + 900);  
+        AddObject(new Ground("platformj2", 0.9), 2112, 31 + 900);          
+        AddObject(new Ground("platformj2", 0.9), 1663, 209 + 900);              
+            
+        AddObject(new Ground("platformj3", 0.9), 2232, -28 + 900);    
+        AddObject(new Ground("platformj2", 0.9), 2364, -119 + 900);             
+        
+        AddObject(new Ground("platformj4", 0.9), 2256, -233 + 900);         
+        AddObject(new Ground("platformj4", 0.9), 2245, -370 + 900);        
         AddObject(new Ground("platformj4", 0.9), 2180, -410 + 900);           
 
-        AddObject(new Ground("platform9", 0.9), 1935, -154 + 900);              
-        AddObject(new Ground("platform9", 0.9), 1802, -366 + 900);           
-        AddObject(new Ground("platform9", 0.9), 2598, -317 + 900);             
+        AddObject(new Ground("platformj2", 0.9), 1800, -148 + 900);        
+        AddObject(new Ground("platformj2", 0.9), 1941, -148 + 900);              
+        AddObject(new Ground("platformj2", 0.9), 2082, -148 + 900);  
+                    
+      
+        // AddObject(new Ground("platform9", 0.9), 1802, -366 + 900);       
+        
+        AddObject(new Ground("platformj2", 0.9), 1778, -361 + 900);        
+        AddObject(new Ground("platformj2", 0.9), 1919, -361 + 900);              
+        AddObject(new Ground("platformj2", 0.9), 2060, -361 + 900);  
+
+        // AddObject(new Ground("platform9", 0.9), 2598, -317 + 900);
+
+        AddObject(new Ground("platformj3", 0.9), 2353, -317 + 900); 
+        AddObject(new Ground("platformj2", 0.9), 2438, -317 + 900);        
+        AddObject(new Ground("platformj2", 0.9), 2579, -317 + 900);              
+        AddObject(new Ground("platformj2", 0.9), 2720, -317 + 900); 
+
+        
         AddObject(new Ground("platform10", 0.9), 1629, -451 + 900);              
         AddObject(new Ground("platform7a", 0.9), 2989, -504 + 900);               
 
