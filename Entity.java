@@ -52,8 +52,8 @@ public class Entity extends Actor
 
     // ----- Attributes ---------- //
 
-    private int MaxHealth = 100;
-    private int Health    = MaxHealth;
+    protected int MaxHealth = 100;
+    protected int Health    = MaxHealth;
 
     public void ReceiveDamage(int Damage)
     {

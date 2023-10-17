@@ -11,6 +11,13 @@ public class Player extends Entity
 
     // ----- Lifecycle ---------- //
 
+    public Player()
+    {
+        super();
+
+        ConstructHUD();
+    }
+
     @Override
     protected void SetupAnimation()
     {
@@ -58,6 +65,7 @@ public class Player extends Entity
         super.act();
 
         HandleInput();
+        UpdateHUD();
     }
 
     // ----- Handler ---------- //
@@ -79,7 +87,11 @@ public class Player extends Entity
         }
 
         if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up"))
-            Movement.Jump();
+        {
+            boolean SuccessJump = Movement.Jump();
+            
+            if (SuccessJump) Greenfoot.playSound("jump.wav");
+        }
 
         if      (Greenfoot.isKeyDown("shift")  && Movement.IsMaxSpeedEqual(RunSpeed))
             Movement.SetMaxSpeed(WalkSpeed);
@@ -111,5 +123,29 @@ public class Player extends Entity
         else if (Speed == 0)                             SetState(EntityState.IDLE);
         else if (0 < Speed && Speed <= WalkSpeed)        SetState(EntityState.WALK);
         else if (WalkSpeed < Speed && Speed <= RunSpeed) SetState(EntityState.RUN);
+    }
+
+    // ----- Combat ---------- //
+
+    @Override
+    protected void Die()
+    {
+        super.Die();
+
+        Greenfoot.playSound("dead.wav");
+    }
+
+    // ----- UI ---------- //
+
+    private HealthHUD Health_HUD;
+
+    private void ConstructHUD()
+    {
+        Health_HUD = new HealthHUD(this, "heart", 700, 75);
+    }
+
+    private void UpdateHUD()
+    {
+        Health_HUD.UpdateHealth(Health);
     }
 }

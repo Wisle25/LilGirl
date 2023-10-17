@@ -1,3 +1,5 @@
+import greenfoot.Greenfoot;
+
 public class Obstacle extends Environment
 {
     // ----- Lifecycle ---------- //
@@ -5,7 +7,7 @@ public class Obstacle extends Environment
     public void act()
     {
         if (Anim != null) Anim.TickComponent();
-        // Damaging();
+        Damaging();
     }
 
     // ----- Components ---------- //
@@ -39,10 +41,12 @@ public class Obstacle extends Environment
             Character.ReceiveDamage(Damage);
 
             // Start new timer
-            World.GetTimerManager().StartTimer("Damaging", 7);
+            World.GetTimerManager().StartTimer("Damaging", 15);
 
-            // Spawn blood effect
+            // Spawn blood and sound effect
             World.addObject(BloodSplash, Character.getX(), Character.getY());
+            Greenfoot.playSound("bloodsplash.wav");
         }
     }
+
 }
