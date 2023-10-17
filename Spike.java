@@ -7,7 +7,7 @@ public class Spike extends Obstacle
     public Spike()
     {
         setImage("images/Traps/Spike/Spike.png");
-        getImage().scale(41, 9);
+        getImage().scale(82, 18);
     }
 
     public Spike(boolean AllowMoving)
@@ -15,7 +15,7 @@ public class Spike extends Obstacle
         bAllowMoving = AllowMoving;
 
         setImage("images/Traps/Spike/Spike.png");
-        getImage().scale(41, 9); 
+        getImage().scale(82, 18); 
     }
 
     public void act()

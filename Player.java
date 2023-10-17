@@ -46,10 +46,10 @@ public class Player extends Entity
         WalkSpeed = 3;
         RunSpeed  = 6;
 
-        Movement.SetAcceleration(8);
-        Movement.SetDeceleration(15);
+        Movement.SetAcceleration(10);
+        Movement.SetDeceleration(17);
         Movement.SetMaxSpeed(RunSpeed);
-        Movement.SetJumpStrength(15);
+        Movement.SetJumpStrength(19);
     }
 
     @Override

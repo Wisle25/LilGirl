@@ -39,6 +39,20 @@ public class Decoration extends Actor
         getImage().scale(newWidth, newHeight);  
     }
 
+    public Decoration(String TilesName)
+    {
+        String Path   = "Tiles/";
+
+        setImage(Path + TilesName + ".png");
+        // getImage().scale(getImage().getWidth() / Scale, getImage().getHeight() / Scale);
+        
+        int newWidth = (int) (getImage().getWidth() / 0.85);
+        int newHeight = (int) (getImage().getHeight() / 0.85);
+
+        // Scale the image to the new size
+        getImage().scale(newWidth, newHeight);  
+    }
+
     public Decoration(String TilesName, float ScaleX, float ScaleY)
     {
         String Path   = "Tiles/";
