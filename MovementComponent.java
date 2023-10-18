@@ -32,6 +32,7 @@ public class MovementComponent
     private int Acceleration;
     private int Deceleration;
     private int JumpStrength;
+    private int FallDistance = 0;
 
     private int CoyoteTimer = 2;
     private boolean WasOnGround = false;
@@ -117,7 +118,8 @@ public class MovementComponent
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
 
             bIsFalling = true;
-            VelocityY += FallingFactor;
+            VelocityY  = VelocityY + FallingFactor <= 20 ? VelocityY + FallingFactor : 20;
+            FallDistance += VelocityY;
         }
         else if (EntityOwner.IsOnGround() && bIsFalling)
         {   
@@ -125,10 +127,15 @@ public class MovementComponent
             Actor Ground = EntityOwner.GetGround();
             EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight()) / 2);
 
-            VelocityY   = 0;
-            WasOnGround = true;
-            bIsFalling  = false;
-            bIsJumping  = false;
+            // Apply fall damage if so
+            if (FallDistance > 160)
+                EntityOwner.ReceiveDamage((int)((FallDistance + 7600) / 160.f));
+
+            VelocityY    = 0;
+            FallDistance = 0;
+            WasOnGround  = true;
+            bIsFalling   = false;
+            bIsJumping   = false;
         }
     }
 
