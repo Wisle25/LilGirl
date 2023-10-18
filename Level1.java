@@ -41,14 +41,33 @@ public class Level1 extends UWorld
 
         AddObject(new Decoration("jendela", 0.85), 2000, 15 + 900);
         AddObject(new Ground("JENDELAT", 0.85), 2000, 47 + 900);
+        AddObject(new Decoration("jendela", 0.85), 2211, 15 + 900);
         AddObject(new Decoration("jendela", 0.85), 2422, 17 + 900);
         AddObject(new Ground("JENDELAT", 0.85), 2422, 49 + 900);
+        AddObject(new Ground("box2", 0.85), 2127, 2 + 900);
+
+
+        AddObject(new Decoration("jendela", 0.85), 1812, -242 + 900); 
+        AddObject(new Ground("box", 0.85), 1747, -168 + 900);
+        AddObject(new Ground("box2", 0.85), 2585, -342 + 900);
+        AddObject(new Ground("kendi", 0.85), 2560, -342 + 900);
+
+
+        AddObject(new Decoration("jendela", 0.85), 2000, -242 + 900);
+        AddObject(new Decoration("JENDELAT", 0.85), 2000, -210 + 900);
+
+        AddObject(new Decoration("jendela", 0.85), 2174, -242 + 900);
+        AddObject(new Ground("JENDELAT", 0.85),  2174, -210 + 900);
+        AddObject(new Decoration("jendela", 0.85), 1825, -460 + 900);
+        AddObject(new Decoration("kurungan", 0.85), 1925, -505 + 900);
+
+
 
         // AddObject(new Gear(), getHeight(), getCellSize());
 
         // Player
         Player M_Player = new Player();
-        SetPlayer(M_Player, 700, 400);
+        SetPlayer(M_Player, 300, 400);
         M_Player.setLocation(2300, 30 + 900);
 
         // BG
@@ -67,19 +86,19 @@ public class Level1 extends UWorld
         AddObject(new Spike(false), 1154, 361 + 900);
         AddObject(new Spike(false), 1229, 361 + 900);        
         AddObject(new Spike(false), 1304, 361 + 900);
-        AddObject(new Spike(false), 1691, 189+ 900);
-        AddObject(new Spike(false), 1640, 189+ 900);        
-        AddObject(new Spike(false), 2392, 297+ 900);
+        AddObject(new Spike(false), 1691, 189 + 900);
+        AddObject(new Spike(false), 1640, 189 + 900);        
+        AddObject(new Spike(false), 2398, 297 + 900);
 
 
 
         AddObject(new STrow(90, 5), 1489, 189 + 900);
 
         AddObject(new STrow(90, 5), 1815, 30 + 900);
-        AddObject(new STrow(90, 5), 2149, -504 + 900);
+        AddObject(new STrow(0, 5), 2003, -402 + 900);
         AddObject(new STrow(90, 5), 2193, -328 + 900);
         AddObject(new STrow(0, 5), 1745, -199 + 900);
-        AddObject(new STrow(180, 5), 2658, -354 + 900);
+        AddObject(new STrow(180, 5), 2500, -354 + 900);
 
 
 
