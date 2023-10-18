@@ -31,6 +31,19 @@ public class Ground extends Environment
         getImage().scale(newWidth, newHeight);  
     }
 
+    public Ground(String TilesName)
+    {
+        String Path   = "Tiles/Level2/";
+
+        setImage(Path + TilesName + ".png");
+        
+        int newWidth = (int) (getImage().getWidth() / 0.9);
+        int newHeight = (int) (getImage().getHeight() / 0.9);
+
+        // Scale the image to the new size
+        getImage().scale(newWidth, newHeight);  
+    }
+
     public Ground(String TilesName, float ScaleX, float ScaleY)
     {
         String Path   = "Tiles/";
