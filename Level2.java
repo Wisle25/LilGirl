@@ -45,6 +45,11 @@ public class Level2 extends UWorld
         AddObject(new Ground("platformt3"), 2617, 296 + 1000);
         AddObject(new Ground("platformt2"), 2800, 296 + 1000);
         AddObject(new Ground("platformt1"), 2950, 296 + 1000);
+        AddObject(new Ground("platformt3"), 3106, 296 + 1000);
+        AddObject(new Ground("platformt4"), 3228, 296 + 1000);
+
+        AddObject(new Ground("platform10"), 3653, 523 + 1000);
+        AddObject(new Ground("platform11"), 4200, 185 + 1000);
 
         
         AddObject(new Ground("platforma1"), 262,194 + 1000);
@@ -52,6 +57,9 @@ public class Level2 extends UWorld
         AddObject(new Ground("platforma3"), 900, 89 + 1000);
         AddObject(new Ground("platforma4"), 1345, 162 + 1000);
         AddObject(new Ground("platforma4"), 1345, 250 + 1000);
+        AddObject(new Ground("platforma5"), 1362, -47 + 1000);
+        AddObject(new Ground("platforma6"), 1929, -184 + 1000);
+
 
 
         // Bg
