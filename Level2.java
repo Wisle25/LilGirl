@@ -27,7 +27,7 @@ public class Level2 extends UWorld
         // Player
         Player M_Player = new Player();
         SetPlayer(M_Player, 300, 400);
-        M_Player.setLocation(150, 500 + 1000);
+        M_Player.setLocation(3837, 81 + 1000);
 
         // Ground
         AddObject(new Ground("platform1"), 265, 566 + 1000);
@@ -48,6 +48,14 @@ public class Level2 extends UWorld
         AddObject(new Ground("platformt3"), 3106, 296 + 1000);
         AddObject(new Ground("platformt4"), 3228, 296 + 1000);
 
+        AddObject(new Ground("platformt2"), 3415, 238 + 1000);
+        AddObject(new Ground("platformt4"), 3523, 148 + 1000);
+        AddObject(new Ground("platformt4"), 3713, 81 + 1000);
+        AddObject(new Ground("platformt2"), 3818, 81 + 1000);
+        AddObject(new Ground("platform12"), 3837, 203 + 1000);
+        AddObject(new Ground("platformt2"), 3900, -32 + 1000);
+
+
         AddObject(new Ground("platform10"), 3653, 523 + 1000);
         AddObject(new Ground("platform11"), 4200, 185 + 1000);
 
@@ -59,6 +67,23 @@ public class Level2 extends UWorld
         AddObject(new Ground("platforma4"), 1345, 250 + 1000);
         AddObject(new Ground("platforma5"), 1362, -47 + 1000);
         AddObject(new Ground("platforma6"), 1929, -184 + 1000);
+        AddObject(new Ground("platforma7"), 2566, -255 + 1000);
+        AddObject(new Ground("platforma8"), 2689, -307 + 1000);
+        AddObject(new Ground("platformt1"), 2812, -289 + 1000);
+        AddObject(new Ground("platforma1"), 2954, -255 + 1000);
+        AddObject(new Ground("platformt2"), 2954, -255 + 1000);
+        AddObject(new Ground("platformt4"), 2954, -255 + 1000);
+        AddObject(new Ground("platformt4"), 2954, -255 + 1000);
+        AddObject(new Ground("platformt2"), 2954, -255 + 1000);
+        AddObject(new Ground("platform4x4"), 3429, -200 + 1000);
+        AddObject(new Ground("platforma1"), 3237, -255 + 1000);
+        AddObject(new Ground("platformt2"), 3499, -183 + 1000);
+        AddObject(new Ground("platform4x4"), 3499, -170 + 1000);
+
+        AddObject(new Ground("platform3x2"), 3429, -220 + 1000);
+        AddObject(new Ground("platformt1"), 3480, -220 + 1000);
+        AddObject(new Ground("platforma1"), 3659, -142 + 1000);
+
 
 
 
