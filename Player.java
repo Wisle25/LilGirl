@@ -50,11 +50,11 @@ public class Player extends Entity
     {
         super.SetupMovement();
 
-        WalkSpeed = 3;
-        RunSpeed  = 6;
+        WalkSpeed = 4;
+        RunSpeed  = 7;
 
-        Movement.SetAcceleration(10);
-        Movement.SetDeceleration(17);
+        Movement.SetAcceleration(13);
+        Movement.SetDeceleration(19);
         Movement.SetMaxSpeed(RunSpeed);
         Movement.SetJumpStrength(19);
     }
