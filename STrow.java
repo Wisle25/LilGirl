@@ -1,4 +1,4 @@
-public class STrow extends Environment
+public class STrow extends Decoration
 {
     // ----- Lifecycle ---------- //
 
@@ -25,7 +25,7 @@ public class STrow extends Environment
 
     private Shuriken[] Shurikens = new Shuriken[3];
 
-    private int ShootTimer = 150;
+    private int ShootTimer = 100;
     private int EachShootTimer = 10;
     private int Count = 0;
 

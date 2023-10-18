@@ -38,6 +38,13 @@ public class TimerManager
         else            TimerHandle.put(Key, Timer);
     }
 
+    public void ClearTimer(String Key)
+    {
+        if (!TimerHandle.containsKey(Key)) return;
+
+        TimerHandle.remove(Key);
+    }
+
     public boolean IsTimerFinished(String Timer) 
     { 
         if (!TimerHandle.containsKey(Timer)) return true;
