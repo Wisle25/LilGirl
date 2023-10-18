@@ -16,9 +16,9 @@ public class MovementComponent
 
     public void TickComponent()
     {
+        HandleCollision();
         Falling(); /* Same as simulating gravity */
         HandleDeceleration();
-        HandleCollision();
         CreateCoyoteTimer();
     }
 
@@ -27,20 +27,21 @@ public class MovementComponent
     private int VelocityX;
     private int VelocityY;
     private int MaxSpeed;
-    private int Delta;
+    private int Direction;
 
     private int Acceleration;
     private int Deceleration;
     private int JumpStrength;
 
-    private int CoyoteTimer = 7;
+    private int CoyoteTimer = 2;
     private boolean WasOnGround = false;
+    private boolean bIsJumping   = false;
 
     /* Use this instead of "move" to move an entity */
     public void AddVelocity(int Factor)
     {
-        Delta     = Factor;
-        VelocityX = VelocityX + Acceleration * Delta;
+        Direction     = Factor;
+        VelocityX = VelocityX + Acceleration * Direction;
 
         // Clamping the velocity if it reaches the MaxSpeed
         if (VelocityX >= MaxSpeed)  VelocityX = MaxSpeed;
@@ -57,14 +58,19 @@ public class MovementComponent
             VelocityY = JumpStrength;
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
 
+            bIsJumping = true;
+
             return true;
         }
-        else if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && Delta != EntityOwner.IsCrawling()) // Wall Jump
+        
+        if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && Direction != EntityOwner.IsCrawling()) // Wall Jump
         {
             VelocityY = JumpStrength;
-            VelocityX = 20 * Delta;
+            VelocityX = 20 * Direction;
 
             EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY() + VelocityY);
+
+            bIsJumping = true;
 
             return true;
         }
@@ -74,9 +80,16 @@ public class MovementComponent
 
     public boolean CanJump()
     {
+        if (bIsJumping) return false;
+
         UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
-        boolean Coyote   = !World.GetTimerManager().IsTimerFinished("CoyoteTimer") && WasOnGround; 
+        boolean CoyoteTime = !World.GetTimerManager().IsTimerFinished("CoyoteTimer");
+
+        // Remove the coyote timer so the coyote won't be triggered in the next jump request
+        if (CoyoteTime) World.GetTimerManager().ClearTimer("CoyoteTimer");
+
+        boolean Coyote   = CoyoteTime;
         boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
 
         return bCanJump;
@@ -89,15 +102,16 @@ public class MovementComponent
 
     private void Falling()
     {
-        // Only simulating when entity is not touching the ground
-        if (EntityOwner.IsCrawling() != 0 && !EntityOwner.IsOnGround())
+        if (EntityOwner.StateEqualTo(EntityState.CRAWLING))
         {
             // Constant velocity
             final int ConstVal = 2;
             VelocityY          = ConstVal;
-
+            bIsJumping         = false;
+            
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
         }
+        // Only simulating when entity is not touching the ground
         else if (!EntityOwner.IsOnGround())
         {
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
@@ -109,11 +123,12 @@ public class MovementComponent
         {   
             // Fix the landing position
             Actor Ground = EntityOwner.GetGround();
-            EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight() - 5) / 2);
+            EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight()) / 2);
 
             VelocityY   = 0;
             WasOnGround = true;
             bIsFalling  = false;
+            bIsJumping  = false;
         }
     }
 
@@ -136,7 +151,7 @@ public class MovementComponent
     {
         while (EntityOwner.CheckAbove()) 
         {
-            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY()+1);
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + 1);
             VelocityY = 0;
         }
 
@@ -169,6 +184,7 @@ public class MovementComponent
     public boolean IsMaxSpeedEqual(int Value) { return MaxSpeed == Value; } 
     public boolean IsFalling()       { return bIsFalling; }
     public int     GetVelocity()     { return VelocityX; }
+    public int     GetDirection()    { return Direction; }
 
     // ----- Modifiers ---------- //
 

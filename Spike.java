@@ -38,7 +38,9 @@ public class Spike extends Obstacle
     public void SetDefaultLocation(int X, int Y)
     {
         DefaultY = Y;
-        TargetY  = Y + getImage().getHeight() * 2;
+        TargetY  = Y + getImage().getHeight();
+
+        System.out.println("DefaultY: " + DefaultY + ". TargetY: " + TargetY);
     }
 
     private void MovingTimer()
@@ -55,8 +57,11 @@ public class Spike extends Obstacle
     {
         if (!bShouldMove) return;
         
+        System.out.println("CurrentY: " + getY() + ". TargetY: " + TargetY);
         if (bGoingDown && getY() <= TargetY)
+        {
             setLocation(getX(), getY() + 2);
+        }
         else if (bGoingDown && getY() > TargetY)
         {
             bShouldMove = false;
