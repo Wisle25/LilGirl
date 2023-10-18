@@ -36,6 +36,14 @@ public class Level1 extends UWorld
         
         AddObject(new Decoration("jendela", 0.85), 1295, 268 + 900);
         AddObject(new Ground("JENDELAT", 0.85), 1295, 300 + 900);
+
+        AddObject(new Ground("pintuFinish", 0.85), 1737, -411 + 900);
+
+        AddObject(new Decoration("jendela", 0.85), 2000, 15 + 900);
+        AddObject(new Ground("JENDELAT", 0.85), 2000, 47 + 900);
+        AddObject(new Decoration("jendela", 0.85), 2422, 17 + 900);
+        AddObject(new Ground("JENDELAT", 0.85), 2422, 49 + 900);
+
         // AddObject(new Gear(), getHeight(), getCellSize());
 
         // Player
@@ -62,13 +70,18 @@ public class Level1 extends UWorld
         AddObject(new Spike(false), 1691, 189+ 900);
         AddObject(new Spike(false), 1640, 189+ 900);        
         AddObject(new Spike(false), 2392, 297+ 900);
-        AddObject(new Spike(false), 2442 , 297+ 900);
 
 
 
         AddObject(new STrow(90, 5), 1489, 189 + 900);
 
         AddObject(new STrow(90, 5), 1815, 30 + 900);
+        AddObject(new STrow(90, 5), 2149, -504 + 900);
+        AddObject(new STrow(90, 5), 2193, -328 + 900);
+        AddObject(new STrow(0, 5), 1745, -199 + 900);
+        AddObject(new STrow(180, 5), 2658, -354 + 900);
+
+
 
         Spike Spikemv1 = new Spike(true);        
 
@@ -82,19 +95,25 @@ public class Level1 extends UWorld
         AddObject(new Ground("platform3", 0.9), 764,534 + 900);
         AddObject(new Ground("platform4", 0.9), 1439,498 + 900);
         AddObject(new Ground("platform5", 0.9), 2117,356 + 900);
-        AddObject(new Ground("platform7", 0.9), 2989,49 + 900);        
-
-        AddObject(new Ground("platformj2", 0.9), 2412, 315 + 900);  
+        AddObject(new Ground("platformj4", 0.9), 2522,253 + 900);   
+        AddObject(new Ground("platformj4", 0.9), 2570,175 + 900);   
+        AddObject(new Ground("platformj4", 0.9), 2489,81 + 900);   
+        AddObject(new Ground("platform8", 0.9), 2414, 489 + 900);        
+        AddObject(new Ground("platform7", 0.9), 2989,49 + 900);   
+        
+        
+        
+        // AddObject(new Ground("platformj2", 0.9), 2412, 315 + 900);  
         AddObject(new Ground("platformj2", 0.9), 2112, 31 + 900);          
         AddObject(new Ground("platformj2", 0.9), 1663, 209 + 900);              
-            
+        
         AddObject(new Ground("platformj3", 0.9), 2232, -28 + 900);    
         AddObject(new Ground("platformj2", 0.9), 2364, -119 + 900);             
         
         AddObject(new Ground("platformj4", 0.9), 2256, -233 + 900);         
         AddObject(new Ground("platformj4", 0.9), 2245, -370 + 900);        
         AddObject(new Ground("platformj4", 0.9), 2180, -410 + 900);           
-
+        
         AddObject(new Ground("platformj2", 0.9), 1800, -148 + 900);        
         AddObject(new Ground("platformj2", 0.9), 1941, -148 + 900);              
         AddObject(new Ground("platformj2", 0.9), 2082, -148 + 900);  
@@ -127,7 +146,6 @@ public class Level1 extends UWorld
         AddObject(new Ground("platforma5", 0.9), 1230, 81 + 900);
         AddObject(new Ground("platforma6", 0.9), 1458, 116 + 900);
         AddObject(new Ground("platformp2", 0.9), 1574,-88 + 900);
-        AddObject(new Ground("platform8", 0.9), 1665, 203 + 900);        
         AddObject(new Ground("platformp3", 0.9), 1739, 133 + 900);        
         AddObject(new Ground("platformp3", 0.9), 1739, -10 + 900);        
 
