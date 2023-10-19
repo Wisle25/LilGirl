@@ -24,6 +24,7 @@ public class MainMenu extends World
 
         /* How to play Button */
         Button HTPlayBtn = new Button("images/Buttons/HowToPlayBtn.png", "images/Buttons/HvrHowToPlayBtn.png");
+        HTPlayBtn.SetScale(2, 2);
         addObject(HTPlayBtn, 400, 350);
     }
 

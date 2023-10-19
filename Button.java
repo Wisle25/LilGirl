@@ -1,5 +1,6 @@
 import greenfoot.Actor;
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
 
 /**
  * Write a description of class Button here.
@@ -13,10 +14,10 @@ public class Button extends Actor
 
     public Button(String ActiveFileName, String HoverFileName)
     {
-        this.ActiveFileName = ActiveFileName;
-        this.HoverFileName  = HoverFileName;
+        this.ActiveImg = new GreenfootImage(ActiveFileName);
+        this.HoverImg  = new GreenfootImage(HoverFileName);
 
-        setImage(this.ActiveFileName);
+        setImage(this.ActiveImg);
     }
 
     public void act()
@@ -27,8 +28,14 @@ public class Button extends Actor
 
     // ===== Properties ========== //
 
-    String ActiveFileName;
-    String HoverFileName;
+    GreenfootImage ActiveImg;
+    GreenfootImage HoverImg;
+
+    public void SetScale(double NewX, double NewY)
+    {
+        ActiveImg.scale((int)(ActiveImg.getWidth() * NewX), (int)(ActiveImg.getHeight() * NewY));
+        HoverImg.scale((int)(HoverImg.getWidth() * NewX), (int)(HoverImg.getHeight() * NewY));
+    }
 
     // ===== Event Detection ========== //
 
@@ -45,7 +52,7 @@ public class Button extends Actor
     {
         if (Greenfoot.mouseMoved(this) && !bIsHovering)
         {
-            setImage(HoverFileName);
+            setImage(HoverImg);
             bIsHovering = true;
     
             if (HoverCb != null) HoverCb.Execute();
@@ -53,7 +60,7 @@ public class Button extends Actor
         else if (bIsHovering && Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
         {
             bIsHovering = false;
-            setImage(ActiveFileName);
+            setImage(ActiveImg);
         }
     }
     
@@ -69,7 +76,7 @@ public class Button extends Actor
     {
         if (!Greenfoot.mousePressed(this)) return;
 
-        setImage(ActiveFileName);
+        setImage(ActiveImg);
 
         if (PressedCb != null) PressedCb.Execute();
     }
