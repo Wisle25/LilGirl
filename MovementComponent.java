@@ -114,14 +114,6 @@ public class MovementComponent
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
         }
         // Only simulating when entity is not touching the ground
-        else if (!EntityOwner.IsOnGround())
-        {
-            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
-
-            bIsFalling = true;
-            VelocityY  = VelocityY + FallingFactor <= 20 ? VelocityY + FallingFactor : 20;
-            FallDistance += VelocityY;
-        }
         else if (EntityOwner.IsOnGround() && bIsFalling)
         {   
             // Fix the landing position
@@ -137,6 +129,14 @@ public class MovementComponent
             WasOnGround  = true;
             bIsFalling   = false;
             bIsJumping   = false;
+        }
+        else if (!EntityOwner.IsOnGround())
+        {
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+
+            bIsFalling = true;
+            VelocityY  = VelocityY + FallingFactor <= 20 ? VelocityY + FallingFactor : 20;
+            FallDistance += VelocityY;
         }
     }
 
@@ -196,6 +196,7 @@ public class MovementComponent
 
     // ----- Modifiers ---------- //
 
+    public void SetDirection   (int Value) { Direction    = Value; }
     public void SetAcceleration(int Value) { Acceleration = Value; }
     public void SetDeceleration(int Value) { Deceleration = Value; }
     public void SetMaxSpeed    (int Value) { MaxSpeed     = Value; }

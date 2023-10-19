@@ -119,7 +119,7 @@ public class Player extends Entity
 
         int Speed = Math.abs(Movement.GetVelocity());
         
-        if      (IsCrawling() != 0 && !IsOnGround() && IsCrawling() == Movement.GetDirection())     SetState(EntityState.CRAWLING);
+        if      (IsCrawling() != 0 && !IsOnGround() && IsCrawling() == Movement.GetDirection()) SetState(EntityState.CRAWLING);
         else if (Movement.IsFalling())                   SetState(EntityState.FALL);
         else if (Speed == 0)                             SetState(EntityState.IDLE);
         else if (0 < Speed && Speed <= WalkSpeed)        SetState(EntityState.WALK);
@@ -148,5 +148,12 @@ public class Player extends Entity
     private void UpdateHUD()
     {
         Health_HUD.UpdateHealth(Health);
+    }
+
+    // ===== Modifiers ========== //
+
+    public void SetDirection(int Value)
+    {
+        Movement.SetDirection(Value);
     }
 }
