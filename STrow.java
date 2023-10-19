@@ -25,8 +25,12 @@ public class STrow extends Decoration
 
     private Shuriken[] Shurikens = new Shuriken[3];
 
-    private int ShootTimer = 100;
-    private int EachShootTimer = 10;
+    private TimerHandle ShootTimerHandler = new TimerHandle();
+    private int ShootTimer = 170;
+
+    private TimerHandle EachShootTimerHandler = new TimerHandle();
+    private int EachShootTimer = 15;
+    
     private int Count = 0;
 
     private boolean Shooting = false;
@@ -41,8 +45,8 @@ public class STrow extends Decoration
     {
         UWorld World = getWorldOfType(UWorld.class);
 
-        boolean bCanShoot  = World.GetTimerManager().IsTimerFinished("ShootTimer");
-        boolean bShootEach = World.GetTimerManager().IsTimerFinished("EachShootTimer");
+        boolean bCanShoot  = World.GetTimerManager().IsTimerFinished(ShootTimerHandler);
+        boolean bShootEach = World.GetTimerManager().IsTimerFinished(EachShootTimerHandler);
         
         if (bCanShoot)
         {
@@ -53,7 +57,7 @@ public class STrow extends Decoration
         {
             World.AddObject(Shurikens[Count++], getX(), getY());
 
-            World.GetTimerManager().StartTimer("EachShootTimer", EachShootTimer);
+            World.GetTimerManager().StartTimer(EachShootTimerHandler, EachShootTimer);
         }
         else if (Shooting && bShootEach && Count == 3)
         {
@@ -61,7 +65,7 @@ public class STrow extends Decoration
             Shooting = false;
 
             // Create new timer to shoot
-            World.GetTimerManager().StartTimer("ShootTimer", ShootTimer);
+            World.GetTimerManager().StartTimer(ShootTimerHandler, ShootTimer);
         }
     } 
 }

@@ -32,6 +32,7 @@ public class Spike extends Obstacle
     private int TargetY;
     private int MoveTimer = 200;
 
+    private TimerHandle MovingTimerHandler = new TimerHandle();
     private boolean bShouldMove = false;
     private boolean bGoingDown  = true;
 
@@ -39,8 +40,6 @@ public class Spike extends Obstacle
     {
         DefaultY = Y;
         TargetY  = Y + getImage().getHeight();
-
-        System.out.println("DefaultY: " + DefaultY + ". TargetY: " + TargetY);
     }
 
     private void MovingTimer()
@@ -49,7 +48,7 @@ public class Spike extends Obstacle
 
         UWorld World = getWorldOfType(UWorld.class);
 
-        if (World.GetTimerManager().IsTimerFinished("MovingTimer"))
+        if (World.GetTimerManager().IsTimerFinished(MovingTimerHandler))
             bShouldMove = true;
     }
 
@@ -68,7 +67,7 @@ public class Spike extends Obstacle
             bGoingDown  = false;
 
             // Start new timer
-            getWorldOfType(UWorld.class).GetTimerManager().StartTimer("MovingTimer", MoveTimer);
+            getWorldOfType(UWorld.class).GetTimerManager().StartTimer(MovingTimerHandler, MoveTimer);
         }
 
         if (!bGoingDown && getY() >= DefaultY)
@@ -79,7 +78,7 @@ public class Spike extends Obstacle
             bGoingDown  = true;
 
             // Start new timer
-            getWorldOfType(UWorld.class).GetTimerManager().StartTimer("MovingTimer", MoveTimer);
+            getWorldOfType(UWorld.class).GetTimerManager().StartTimer(MovingTimerHandler, MoveTimer);
         }
     }
 }
