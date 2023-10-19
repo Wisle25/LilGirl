@@ -22,6 +22,9 @@ public class MainMenu extends World
         PlayBtn.OnPressed(this::PlayBtnPressed);
         addObject(PlayBtn, 400, 250);
 
+        /* How to play Button */
+        Button HTPlayBtn = new Button("images/Buttons/HowToPlayBtn.png", "images/Buttons/HvrHowToPlayBtn.png");
+        addObject(HTPlayBtn, 400, 350);
     }
 
     // ===== Button Handler ========== //
