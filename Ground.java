@@ -1,6 +1,5 @@
 public class Ground extends Environment
 {
-
     // ----- Lifecycle ---------- //
 
     public Ground()

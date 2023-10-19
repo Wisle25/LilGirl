@@ -1,4 +1,4 @@
-public class STrow extends Decoration
+public class STrow extends Environment
 {
     // ----- Lifecycle ---------- //
 

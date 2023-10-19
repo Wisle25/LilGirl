@@ -96,11 +96,11 @@ public class AnimationComponent
 
             if (FileFrames == null) return;
 
-            Arrays.sort(FileFrames, 0, FrameCount, Comparator.comparing(File::getName));
-
             // Updating animation properties
             FrameCount = FileFrames.length;
             Frames     = new GreenfootImage[FrameCount];
+            
+            Arrays.sort(FileFrames, 0, FrameCount, Comparator.comparing(File::getName));
 
             for (int I = 0; I < FrameCount; ++I)
                 Frames[I] = new GreenfootImage(FolderPath + "/" + FileFrames[I].getName());

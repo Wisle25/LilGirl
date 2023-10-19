@@ -71,7 +71,6 @@ public class MovementComponent
             VelocityX = 20 * Direction;
 
             EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY() + VelocityY);
-            System.out.println("Here?" + ", Direction: " + Direction + " Crawling: " + EntityOwner.IsCrawling() + " Condition true? " + (Direction != EntityOwner.IsCrawling()));
             bIsJumping = true;
 
             return true;

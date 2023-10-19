@@ -56,7 +56,6 @@ public class Spike extends Obstacle
     {
         if (!bShouldMove) return;
         
-        System.out.println("CurrentY: " + getY() + ". TargetY: " + TargetY);
         if (bGoingDown && getY() <= TargetY)
         {
             setLocation(getX(), getY() + 2);

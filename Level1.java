@@ -25,8 +25,8 @@ public class Level1 extends UWorld
         AddObject(new Decoration("torch"), 440, 397);          
         AddObject(new Ground("box", 0.8), 516, 467);       
 
-        AddObject(new Decoration("jendela", 0.85), 706, 352);
-        AddObject(new Ground("jendelat", 0.85), 706, 379);
+        AddObject(new Decoration("jendela", 0.85), 706, 320);
+        AddObject(new Ground("jendelat", 0.85), 706, 357);
         AddObject(new Decoration("torch", 0.85), 755, 365);
         AddObject(new Decoration("box", 0.8), 918, 430);       
         AddObject(new Decoration("jendela", 0.85), 900, 320);
