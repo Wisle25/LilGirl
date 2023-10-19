@@ -109,6 +109,7 @@ public class MovementComponent
             final int ConstVal = 2;
             VelocityY          = ConstVal;
             bIsJumping         = false;
+            FallDistance       = 0;
             
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
         }
