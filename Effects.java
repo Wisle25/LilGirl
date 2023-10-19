@@ -28,7 +28,7 @@ public class Effects extends Actor
             // Remove the effect
             UWorld World = getWorldOfType(UWorld.class);
 
-            World.removeObject(this);
+            World.RemoveObject(this);
         }
     }
 }

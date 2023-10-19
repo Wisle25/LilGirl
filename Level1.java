@@ -9,6 +9,8 @@ public class Level1 extends UWorld
         // super(5000, 1800, 1, 2500, 1500);
 
         prepare();
+
+        super.act();
     }
     
     private void prepare()
@@ -27,8 +29,8 @@ public class Level1 extends UWorld
         AddObject(new Ground("jendelat", 0.85), 706, 379);
         AddObject(new Decoration("torch", 0.85), 755, 365);
         AddObject(new Decoration("box", 0.8), 918, 430);       
-        AddObject(new Decoration("jendela", 0.85), 900, 340);
-        AddObject(new Ground("jendelat", 0.85), 900, 367);
+        AddObject(new Decoration("jendela", 0.85), 900, 320);
+        AddObject(new Ground("jendelat", 0.85), 900, 347);
 
         AddObject(new Decoration("jendela", 0.85), 1161, 268);
         AddObject(new Ground("jendelat", 0.85), 1161, 300);

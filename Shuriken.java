@@ -31,24 +31,15 @@ public class Shuriken extends Obstacle
         boolean Player = getOneIntersectingObject(Player.class) != null;
         boolean Ground = getOneIntersectingObject(Ground.class) != null;
 
-        if (Player || Ground)
+        if (Player || Ground || Distance > MaxDistance)
         {
+            Distance = 0;
             getWorldOfType(UWorld.class).RemoveObject(this);
-
-            return;
-        }
-        
-        if (Distance <= MaxDistance)
-        {
-            Distance += Speed;
-            move(Speed);
         }
         else
         {
-            Distance     = 0;
-            UWorld World = getWorldOfType(UWorld.class);
-
-            World.RemoveObject(this);
+            Distance += Speed;
+            move(Speed);
         }
     }
 }

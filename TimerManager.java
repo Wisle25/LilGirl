@@ -1,53 +1,51 @@
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class TimerManager 
 {
-    private Map<String, Integer> TimerHandle;
-    private Set<String>          TimerToRemove;
+    private Set<TimerHandle> TimerHandles;
+    private Set<TimerHandle> TimerToRemove;
 
     // ----- Lifecycle ---------- //
     
     public TimerManager()
     {
-        TimerHandle   = new HashMap<>();
+        TimerHandles  = new HashSet<>();
         TimerToRemove = new HashSet<>();
     }
 
     public void TickManager()
     {
-        TimerHandle  .forEach(this::RunTimer);
-        TimerToRemove.forEach(TimerHandle::remove);
+        TimerHandles .forEach(this::RunTimer);
+        TimerToRemove.forEach(TimerHandles::remove);
         TimerToRemove.clear();
     }
     
     // ----- Timer ---------- //
 
-    public void StartTimer(String Handler, int Timer)
+    public void StartTimer(TimerHandle Handler, int Timer)
     {
-        TimerHandle.put(Handler, Timer);
+        Handler     .SetTimer(Timer);
+        TimerHandles.add(Handler);
     }
 
-    private void RunTimer(String Key, Integer Timer)
+    private void RunTimer(TimerHandle Handler)
     {
-        --Timer;
+        Handler.Run();
 
-        if (Timer <= 0) TimerToRemove.add(Key);
-        else            TimerHandle.put(Key, Timer);
+        if (Handler.IsFinished()) TimerToRemove.add(Handler);
     }
 
-    public void ClearTimer(String Key)
+    public void ClearTimer(TimerHandle Key)
     {
-        if (!TimerHandle.containsKey(Key)) return;
+        if (!TimerHandles.contains(Key)) return;
 
-        TimerHandle.remove(Key);
+        TimerHandles.remove(Key);
     }
 
-    public boolean IsTimerFinished(String Timer) 
+    public boolean IsTimerFinished(TimerHandle Timer) 
     { 
-        if (!TimerHandle.containsKey(Timer)) return true;
+        if (!TimerHandles.contains(Timer)) return true;
 
         return false; 
     }

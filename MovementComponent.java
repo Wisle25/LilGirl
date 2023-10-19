@@ -34,6 +34,7 @@ public class MovementComponent
     private int JumpStrength;
     private int FallDistance = 0;
 
+    private TimerHandle CoyoteTimerHandle = new TimerHandle();
     private int CoyoteTimer = 2;
     private boolean WasOnGround = false;
     private boolean bIsJumping   = false;
@@ -64,13 +65,13 @@ public class MovementComponent
             return true;
         }
         
-        if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && Direction != EntityOwner.IsCrawling()) // Wall Jump
+        if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && (Direction != EntityOwner.IsCrawling())) // Wall Jump
         {
             VelocityY = JumpStrength;
             VelocityX = 20 * Direction;
 
             EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY() + VelocityY);
-
+            System.out.println("Here?" + ", Direction: " + Direction + " Crawling: " + EntityOwner.IsCrawling() + " Condition true? " + (Direction != EntityOwner.IsCrawling()));
             bIsJumping = true;
 
             return true;
@@ -85,10 +86,10 @@ public class MovementComponent
 
         UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
-        boolean CoyoteTime = !World.GetTimerManager().IsTimerFinished("CoyoteTimer");
+        boolean CoyoteTime = !World.GetTimerManager().IsTimerFinished(CoyoteTimerHandle);
 
         // Remove the coyote timer so the coyote won't be triggered in the next jump request
-        if (CoyoteTime) World.GetTimerManager().ClearTimer("CoyoteTimer");
+        if (CoyoteTime) World.GetTimerManager().ClearTimer(CoyoteTimerHandle);
 
         boolean Coyote   = CoyoteTime;
         boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
@@ -182,7 +183,7 @@ public class MovementComponent
             WasOnGround  = false;
             UWorld World = EntityOwner.getWorldOfType(UWorld.class);
 
-            World.GetTimerManager().StartTimer("CoyoteTimer", CoyoteTimer);
+            World.GetTimerManager().StartTimer(CoyoteTimerHandle, CoyoteTimer);
         }
     }
 
