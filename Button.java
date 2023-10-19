@@ -31,10 +31,26 @@ public class Button extends Actor
     GreenfootImage ActiveImg;
     GreenfootImage HoverImg;
 
+    int ScaleX, ScaleY;
+
     public void SetScale(double NewX, double NewY)
     {
-        ActiveImg.scale((int)(ActiveImg.getWidth() * NewX), (int)(ActiveImg.getHeight() * NewY));
-        HoverImg.scale((int)(HoverImg.getWidth() * NewX), (int)(HoverImg.getHeight() * NewY));
+        ScaleX = (int)NewX;
+        ScaleY = (int)NewY;
+
+        Scale(ScaleX, ScaleY);
+    }
+
+    private void Scale(int X, int Y)
+    {
+        ActiveImg.scale((int)(ActiveImg.getWidth() * X), (int)(ActiveImg.getHeight() * Y));
+        HoverImg.scale((int)(HoverImg.getWidth() * X), (int)(HoverImg.getHeight() * Y));        
+    }
+
+    public void Hide(boolean bHide)
+    {
+        if (bHide) Scale(0, 0);
+        else       Scale(ScaleX, ScaleY);
     }
 
     // ===== Event Detection ========== //
