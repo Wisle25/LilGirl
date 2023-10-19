@@ -129,7 +129,7 @@ public class MovementComponent
             EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight()) / 2);
 
             // Apply fall damage if so
-            if (FallDistance > 160)
+            if (FallDistance > 190)
                 EntityOwner.ReceiveDamage((int)((FallDistance + 7600) / 160.f));
 
             VelocityY    = 0;

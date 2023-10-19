@@ -33,7 +33,8 @@ public class MainMenu extends World
         addObject(Buttons.get("HTPlayBtn"), 400, 350);
 
         /* Credit Button */
-        Buttons.put("CreditBtn", new Button(Path + "CreditBtn.png", Path + "HvrVreditBtn.png"));
+        Buttons.put("CreditBtn", new Button(Path + "CreditBtn.png", Path + "HvrCreditBtn.png"));
+        Buttons.get("CreditBtn").SetScale(0.5, 0.5);
         Buttons.get("CreditBtn").OnPressed(this::CreditBtnPressed);
         addObject(Buttons.get("CreditBtn"), 400, 450);
     }
@@ -42,6 +43,7 @@ public class MainMenu extends World
     {
         if (Greenfoot.isKeyDown("backspace") && bDisplaying)
         {
+            bDisplaying = false;
             setBackground(MainBg);
 
             Buttons.forEach((Key, Value) -> {

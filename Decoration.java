@@ -41,7 +41,7 @@ public class Decoration extends Actor
 
     public Decoration(String TilesName)
     {
-        String Path   = "Tiles/";
+        String Path   = "Tiles/Level2/";
 
         setImage(Path + TilesName + ".png");
         // getImage().scale(getImage().getWidth() / Scale, getImage().getHeight() / Scale);

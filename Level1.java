@@ -22,7 +22,7 @@ public class Level1 extends UWorld
         AddObject(new Decoration("torch", 0.85), 134, 462);         
         AddObject(new Ground("kendi", 0.8), 346, 540);       
 
-        AddObject(new Decoration("torch"), 440, 397);          
+        AddObject(new Decoration("torch", 0.85), 440, 397);          
         AddObject(new Ground("box", 0.8), 516, 467);       
 
         AddObject(new Decoration("jendela", 0.85), 706, 320);
