@@ -55,15 +55,15 @@ public class Entity extends Actor
     protected int MaxHealth = 100;
     protected int Health    = MaxHealth;
 
-    public void ReceiveDamage(int Damage)
+    public void ReceiveDamage(int Damage, DamageType Type)
     {
         Health = Health - Damage <= 0 ? 0 : Health - Damage;
 
         if (Health == 0)
-            Die();
+            Die(Type);
     }
 
-    protected void Die()
+    protected void Die(DamageType Type)
     {
         SetState(EntityState.DIE);
     }
@@ -93,7 +93,7 @@ public class Entity extends Actor
 
     public boolean CheckRight()
     {
-        return getOneObjectAtOffset(getImage().getWidth()/2, 0, Ground.class) != null;
+        return getOneObjectAtOffset(getImage().getWidth() / 2, 0, Ground.class) != null;
     }
 
     public boolean CheckLeft()
@@ -105,13 +105,14 @@ public class Entity extends Actor
     {
         boolean Left = getOneObjectAtOffset(-getImage().getWidth() / 2 - 1, 0, Ground.class) != null;
         boolean Right = getOneObjectAtOffset(getImage().getWidth() / 2 + 1, 0, Ground.class) != null;
+        boolean Web   = getOneIntersectingObject(Web.class) != null;
 
-        return Left ? -1 : Right ? 1 : 0;
+        return Left ? -1 : Right || Web ? 1 : 0;
     }
 
     public boolean IsOnGround()
     {
-        Actor Ground = getOneObjectAtOffset(0, getImage().getHeight() / 2, Ground.class);
+        Actor Ground = getOneObjectAtOffset(0, getImage().getHeight() / 2 + 1, Ground.class);
 
         return Ground != null;
     }

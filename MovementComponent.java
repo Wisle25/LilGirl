@@ -35,9 +35,11 @@ public class MovementComponent
     private int FallDistance = 0;
 
     private TimerHandle CoyoteTimerHandle = new TimerHandle();
-    private int CoyoteTimer = 2;
+    private int CoyoteTimer = 3;
     private boolean WasOnGround = false;
-    private boolean bIsJumping   = false;
+    
+    private TimerHandle JumpTimerHandle = new TimerHandle();
+    private int JumpTimer = 5;
 
     /* Use this instead of "move" to move an entity */
     public void AddVelocity(int Factor)
@@ -57,21 +59,24 @@ public class MovementComponent
     {      
         if (CanJump())
         {
-            VelocityY = JumpStrength;
-            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+            VelocityY  = JumpStrength;
 
-            bIsJumping = true;
+            EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
+            EntityOwner.getWorldOfType(UWorld.class).GetTimerManager().StartTimer(JumpTimerHandle, JumpTimer);
 
             return true;
         }
         
-        if (EntityOwner.StateEqualTo(EntityState.CRAWLING) && (Direction != EntityOwner.IsCrawling())) // Wall Jump
+        boolean AttempJumpWall = EntityOwner.getWorldOfType(UWorld.class).GetTimerManager().IsTimerFinished(JumpTimerHandle) && 
+                                 EntityOwner.StateEqualTo(EntityState.CRAWLING)                                              && 
+                                 (Direction != EntityOwner.IsCrawling());
+        if (AttempJumpWall) // Wall Jump
         {
-            VelocityY = JumpStrength;
-            VelocityX = 20 * Direction;
+            VelocityY  = JumpStrength;
+            VelocityX  = 20 * Direction;
 
             EntityOwner.setLocation(EntityOwner.getX() + VelocityX, EntityOwner.getY() + VelocityY);
-            bIsJumping = true;
+            EntityOwner.getWorldOfType(UWorld.class).GetTimerManager().StartTimer(JumpTimerHandle, JumpTimer);
 
             return true;
         }
@@ -80,18 +85,19 @@ public class MovementComponent
     }
 
     public boolean CanJump()
-    {
-        if (bIsJumping) return false;
-
+    {        
         UWorld World = EntityOwner.getWorldOfType(UWorld.class);
+     
+        if (!World.GetTimerManager().IsTimerFinished(JumpTimerHandle)) return false;
 
         boolean CoyoteTime = !World.GetTimerManager().IsTimerFinished(CoyoteTimerHandle);
 
         // Remove the coyote timer so the coyote won't be triggered in the next jump request
         if (CoyoteTime) World.GetTimerManager().ClearTimer(CoyoteTimerHandle);
 
-        boolean Coyote   = CoyoteTime;
-        boolean bCanJump = EntityOwner.IsOnGround() ? true : Coyote;
+        boolean Coyote      = CoyoteTime;
+        boolean CheckEntity = EntityOwner.IsOnGround() && !EntityOwner.StateEqualTo(EntityState.CRAWLING); 
+        boolean bCanJump = CheckEntity || Coyote;
 
         return bCanJump;
     }
@@ -108,28 +114,28 @@ public class MovementComponent
             // Constant velocity
             final int ConstVal = 2;
             VelocityY          = ConstVal;
-            bIsJumping         = false;
             FallDistance       = 0;
-            
+
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
         }
-        // Only simulating when entity is not touching the ground
         else if (EntityOwner.IsOnGround() && bIsFalling)
         {   
             // Fix the landing position
             Actor Ground = EntityOwner.GetGround();
-            EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight()) / 2);
-
+            if (Ground != null)
+                EntityOwner.setLocation(EntityOwner.getX(), Ground.getY() - (Ground.getImage().getHeight() + EntityOwner.getImage().getHeight()) / 2);
+            
             // Apply fall damage if so
-            if (FallDistance > 190)
-                EntityOwner.ReceiveDamage((int)((FallDistance + 7600) / 160.f));
+            if (FallDistance > 190) EntityOwner.ReceiveDamage((int)((FallDistance + 7600) / 160.f), DamageType.FALL);
 
             VelocityY    = 0;
             FallDistance = 0;
             WasOnGround  = true;
             bIsFalling   = false;
-            bIsJumping   = false;
+
+            EntityOwner.getWorldOfType(UWorld.class).GetTimerManager().ClearTimer(JumpTimerHandle);
         }
+        // Only simulating when entity is not touching the ground
         else if (!EntityOwner.IsOnGround())
         {
             EntityOwner.setLocation(EntityOwner.getX(), EntityOwner.getY() + VelocityY);
@@ -137,6 +143,13 @@ public class MovementComponent
             bIsFalling = true;
             VelocityY  = VelocityY + FallingFactor <= 20 ? VelocityY + FallingFactor : 20;
             FallDistance += VelocityY;
+
+            // Fall Distance reach the max, player should Die
+            if (FallDistance > 1000)
+            {
+                FallDistance = 0;
+                EntityOwner.ReceiveDamage(100000, DamageType.FALL);
+            }
         }
     }
 

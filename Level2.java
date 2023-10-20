@@ -36,7 +36,6 @@ public class Level2 extends UWorld
         AddObject(new STrow(180, 5), 1244, 426);
         AddObject(new Ground("platformt1"), 865, 378);
         AddObject(new Ground("platformt3"), 987, 335);
-        AddObject(new Decoration("pintuFinish", 0.85), 122, 492);
         AddObject(new Decoration("spiderweb1"), 3562, -186 +1000);
         AddObject(new Spike(), 1832, -665);
         AddObject(new Spike(), 1885, -665);
@@ -47,7 +46,6 @@ public class Level2 extends UWorld
         AddObject(new Ground("platformt1"), 1978, -729);
         AddObject(new Ground("platformt1"), 1903, -791);
         AddObject(new Ground("platformt1"), 1818, -766);
-        AddObject(new Ground("pintuFinish"), 2862, -1201);
         AddObject(new STrow(0, 5), 1480, -700);
         AddObject(new Gear(), 1816, -1055);
         AddObject(new Ground("kendi", 0.85), 1899, -1105);
@@ -188,6 +186,16 @@ public class Level2 extends UWorld
         AddObject(new Ground("platformt1"), 3480, -220);
         AddObject(new Ground("platforma1"), 3659, -142);
 
+        // Checkpoint
+        AddObject(new Decoration("pintuFinish", 0.85), 122, 492);
+        
+        Checkpoint FinishCheckpoint = new Checkpoint("pintuFinish", 0.85);
+        AddObject(FinishCheckpoint, 2862, -1201);
+        FinishCheckpoint.OnArrived(() -> {
+            Greenfoot.playSound("CloseDoor.wav");
+            Greenfoot.setWorld(new TransitionWorld(new Level2(), "ToBeContinued", 100));
+        });
+        
         // Bg
         GreenfootImage bg = new GreenfootImage("images/Tiles/Level2/bg.png");
         SetScrollingBackground(bg);

@@ -1,3 +1,4 @@
+import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 public class Level1 extends UWorld
@@ -38,7 +39,12 @@ public class Level1 extends UWorld
         AddObject(new Decoration("jendela", 0.85), 1295, 268);
         AddObject(new Ground("jendelat", 0.85), 1295, 300);
 
-        AddObject(new Ground("pintuFinish", 0.85), 1737, -411);
+        Checkpoint FinishCheckpoint = new Checkpoint("pintuFinish", 0.85);
+        AddObject(FinishCheckpoint, 1737, -411);
+        FinishCheckpoint.OnArrived(() -> {
+            Greenfoot.playSound("CloseDoor.wav");
+            Greenfoot.setWorld(new TransitionWorld(new Level2(), "CloseDoor", 100));
+        });
 
         AddObject(new Decoration("jendela", 0.85), 2000, 0);
         AddObject(new Ground("jendelat", 0.85), 2000, 32);
@@ -59,8 +65,6 @@ public class Level1 extends UWorld
         AddObject(new Ground("jendelat", 0.85),  2174, -210);
         AddObject(new Decoration("jendela", 0.85), 1825, -460);
         AddObject(new Decoration("kurungan", 0.85), 1925, -505);
-
-        // AddObject(new Gear(), getHeight(), getCellSize());
 
         // Player
         Player M_Player = new Player();
@@ -151,7 +155,6 @@ public class Level1 extends UWorld
         AddObject(new Ground("platformp3", 0.9), 1739, -10);        
 
         AddObject(new Ground("platforma7", 0.9), 2295, -556);
-
         
     }
 }

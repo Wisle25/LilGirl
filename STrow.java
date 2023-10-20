@@ -1,3 +1,5 @@
+import greenfoot.Greenfoot;
+
 public class STrow extends Environment
 {
     // ----- Lifecycle ---------- //
@@ -65,7 +67,11 @@ public class STrow extends Environment
             Shooting = false;
 
             // Create new timer to shoot
-            World.GetTimerManager().StartTimer(ShootTimerHandler, ShootTimer);
+            int MaxTimer = ShootTimer + 10;
+            int MinTimer = ShootTimer - 10;
+            int RandomTimer = Greenfoot.getRandomNumber(MaxTimer - MinTimer + 1) + MinTimer;
+            
+            World.GetTimerManager().StartTimer(ShootTimerHandler, RandomTimer);
         }
     } 
 }

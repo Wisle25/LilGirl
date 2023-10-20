@@ -37,6 +37,8 @@ public class MainMenu extends World
         Buttons.get("CreditBtn").SetScale(0.5, 0.5);
         Buttons.get("CreditBtn").OnPressed(this::CreditBtnPressed);
         addObject(Buttons.get("CreditBtn"), 400, 450);
+
+        Greenfoot.start();
     }
 
     public void act()
