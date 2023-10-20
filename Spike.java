@@ -8,6 +8,8 @@ public class Spike extends Obstacle
     {
         setImage("images/Traps/Spike/Spike.png");
         getImage().scale(82, 18);
+
+        Type = DamageType.SPIKE;
     }
 
     public Spike(boolean AllowMoving)

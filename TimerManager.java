@@ -3,6 +3,8 @@ import java.util.Set;
 
 public class TimerManager 
 {
+    // ===== Timer Handle ========== //
+
     private Set<TimerHandle> TimerHandles;
     private Set<TimerHandle> TimerToRemove;
 
@@ -26,6 +28,12 @@ public class TimerManager
     public void StartTimer(TimerHandle Handler, int Timer)
     {
         Handler     .SetTimer(Timer);
+        TimerHandles.add(Handler);
+    }
+
+    public void StartTimer(TimerHandle Handler, int Timer, TimerHandle.TimerFinishedEvent Event)
+    {
+        Handler     .SetTimer(Timer, Event);
         TimerHandles.add(Handler);
     }
 

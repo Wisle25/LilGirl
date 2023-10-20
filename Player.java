@@ -63,10 +63,10 @@ public class Player extends Entity
     @Override
     public void act()
     {
-        super.act();
-
         HandleInput();
         UpdateHUD();
+
+        super.act();
     }
 
     // ----- Handler ---------- //
@@ -90,7 +90,7 @@ public class Player extends Entity
         if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up"))
         {
             boolean SuccessJump = Movement.Jump();
-            
+
             if (SuccessJump) Greenfoot.playSound("jump.wav");
         }
 
@@ -128,12 +128,49 @@ public class Player extends Entity
 
     // ----- Combat ---------- //
 
+    private TimerHandle DieTimerHandle = new TimerHandle();
+    private int         DieTimer       = 150;
+
     @Override
-    protected void Die()
+    protected void Die(DamageType Type)
     {
-        super.Die();
+        if (EState == EntityState.DIE) return;
+
+        super.Die(Type);
 
         Greenfoot.playSound("dead.wav");
+
+        // Delay before showing the ending
+        getWorldOfType(UWorld.class).GetTimerManager().StartTimer(DieTimerHandle, DieTimer, () -> {
+            Ending(Type);
+        });
+    }
+
+    private void Ending(DamageType Type)
+    {
+        String Path;
+
+        switch (Type)
+        {
+            case GEAR:
+                Path = "TornedUp";
+                break;
+
+            case FALL:
+                Path = "Fallen";
+                break;
+                    
+            case SPIKE:
+                Path = "Spiked";
+                break;
+
+            default:
+                Path = "Gear";
+                break;
+        }
+
+        Greenfoot.playSound("dead.wav");
+        Greenfoot.setWorld(new TransitionWorld(new MainMenu(), Path, 200));
     }
 
     // ----- UI ---------- //

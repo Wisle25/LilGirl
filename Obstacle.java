@@ -26,7 +26,9 @@ public class Obstacle extends Environment
     // ----- Combat ---------- //
 
     private TimerHandle DamageTimerHandler = new TimerHandle();
-    protected int Damage = 20;
+
+    protected int Damage      = 20;
+    protected DamageType Type = DamageType.GEAR;
 
     protected void Damaging()
     {
@@ -39,7 +41,12 @@ public class Obstacle extends Environment
 
         if (Character != null && !Character.StateEqualTo(EntityState.DIE))
         {
-            Character.ReceiveDamage(Damage);
+            // Randomize damage
+            int MinDmg = Damage - 10;
+            int MaxDmg = Damage + 10;
+            int RandDamage = Greenfoot.getRandomNumber(MaxDmg - MinDmg + 1) + MinDmg;
+
+            Character.ReceiveDamage(RandDamage, Type);
 
             // Start new timer
             World.GetTimerManager().StartTimer(DamageTimerHandler, 30);

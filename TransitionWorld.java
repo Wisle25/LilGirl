@@ -1,0 +1,93 @@
+import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class TransitionWorld here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class TransitionWorld extends UWorld
+{
+    private World NextWorld;
+    private TimerHandle ChangeWorldTimerHandler = new TimerHandle();
+
+    // ===== Lifecycle ========== //
+
+    public TransitionWorld(World InNextWorld, String AnimPath, int Delay)
+    {
+        super(800, 600, 1, 1, 1);
+
+        this.NextWorld = InNextWorld;
+        this.Delay     = Delay;
+
+        GetTimerManager().StartTimer(ChangeWorldTimerHandler, Delay);
+        GetScenesFromPath("images/Scenes/" + AnimPath);
+    }
+
+    public void act()
+    {
+        super.act();
+
+        ChangeWorld();
+    }
+
+    // ===== Scenes ========== //
+
+    private GreenfootImage[] Scenes;
+    private int SceneCount;
+    private int CurrentScene = 0;
+    private int Delay;
+
+    // ===== Changing World ========== //
+
+    private boolean bChanged = false;
+
+    private void GetScenesFromPath(String AnimPath)
+    {
+        File Folder = new File(AnimPath);
+
+        if (Folder.exists() && Folder.isDirectory())
+        {
+            // Get the frames from folder
+            File[] FileFrames = Folder.listFiles();
+
+            if (FileFrames == null) return;
+
+            // Updating animation properties
+            SceneCount = FileFrames.length;
+            Scenes     = new GreenfootImage[SceneCount];
+            
+            Arrays.sort(FileFrames, 0, SceneCount, Comparator.comparing(File::getName));
+
+            for (int I = 0; I < SceneCount; ++I)
+                Scenes[I] = new GreenfootImage(AnimPath + "/" + FileFrames[I].getName());
+
+            setBackground(Scenes[0]);
+        }  
+    }
+
+    private void ChangeWorld()
+    {
+        if (bChanged) return;
+
+        if (GetTimerManager().IsTimerFinished(ChangeWorldTimerHandler))
+        {
+            if (++CurrentScene < SceneCount)
+            {
+                setBackground(Scenes[CurrentScene++]);
+    
+                // Also recreate the time
+                GetTimerManager().StartTimer(ChangeWorldTimerHandler, Delay);
+            }
+            else
+            {
+                bChanged = true;
+                Greenfoot.setWorld(NextWorld);
+            }
+        }
+    }
+}
