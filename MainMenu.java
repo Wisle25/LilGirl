@@ -17,7 +17,7 @@ public class MainMenu extends World
         super(800, 600, 1);
 
         setBackground("images/Bg/menufinal.png");
-    
+
         // Adding buttons
         String Path = "images/Buttons/";
 
@@ -39,6 +39,7 @@ public class MainMenu extends World
         addObject(Buttons.get("CreditBtn"), 400, 450);
 
         Greenfoot.start();
+        prepare();
     }
 
     public void act()
@@ -49,8 +50,8 @@ public class MainMenu extends World
             setBackground(MainBg);
 
             Buttons.forEach((Key, Value) -> {
-                Value.Hide(false);
-            });
+                        Value.Hide(false);
+                });
         }
     }
 
@@ -93,9 +94,16 @@ public class MainMenu extends World
 
         bDisplaying = true;
         Buttons.forEach((Key, Value) -> {
-            Value.Hide(true);
-        });
+                    Value.Hide(true);
+            });
 
         return true;
+    }
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
     }
 }
