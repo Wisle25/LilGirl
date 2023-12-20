@@ -87,6 +87,11 @@ public class UWorld extends World
         ActorMaxY = getHeight() / 2 + RangeY / 2;
     }
 
+    public Player GetPlayer()
+    {
+        return (Player)MainActor;
+    }
+
     public void SetScrollingBackground(GreenfootImage ScrollingBackground)
     {
         if (MainActor == null)
