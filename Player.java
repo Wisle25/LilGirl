@@ -4,6 +4,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Player extends Entity
 {
+    // ===== Components ========== //
+
+    private InventoryComponent Inventory;
+
     // ----- Movement ---------- //
 
     private int WalkSpeed;
@@ -16,6 +20,7 @@ public class Player extends Entity
         super();
 
         ConstructHUD();
+        Inventory = new InventoryComponent();
     }
 
     @Override
@@ -36,10 +41,12 @@ public class Player extends Entity
         Animations.put(EntityState.FALL, new AnimationComponent(this, Path + "Jump", 1));
         Animations.put(EntityState.DIE, new AnimationComponent(this, Path + "Die", 9));
         Animations.put(EntityState.CRAWLING, new AnimationComponent(this, Path + "Crawl", 1));
+        Animations.put(EntityState.SHOOT, new AnimationComponent(this, Path + "Throw", 3));
 
         // Edit some properties
-        Animations.get(EntityState.FALL).SetPauseAtEnd(true);
-        Animations.get(EntityState.DIE) .SetPauseAtEnd(true);
+        Animations.get(EntityState.FALL) .SetPauseAtEnd(true);
+        Animations.get(EntityState.DIE)  .SetPauseAtEnd(true);
+        Animations.get(EntityState.SHOOT).SetPauseAtEnd(true);
 
         Animations.forEach((Key, Value) -> {
             Value.SetScale(1.2);
@@ -65,6 +72,7 @@ public class Player extends Entity
     {
         HandleInput();
         UpdateHUD();
+        SenseWeapon();
 
         super.act();
     }
@@ -98,6 +106,23 @@ public class Player extends Entity
             Movement.SetMaxSpeed(WalkSpeed);
         else if (!Greenfoot.isKeyDown("shift") && Movement.IsMaxSpeedEqual(WalkSpeed))
             Movement.SetMaxSpeed(RunSpeed);
+
+        if (Greenfoot.isKeyDown("F"))
+            if (OverlappingWeapon != null) Inventory.AddToInventory(OverlappingWeapon, this);
+
+        if (Greenfoot.mousePressed(null))
+        {
+            if (Greenfoot.getMouseInfo().getButton() == 1) // LMB
+            {
+                boolean SucessShooting = Inventory.Shoot(Movement.GetDirection());
+
+                if (SucessShooting) EState = EntityState.SHOOT;
+            }
+        }
+
+        // Reset the state when shooting
+        if (EState == EntityState.SHOOT && Animations.get(EntityState.SHOOT).IsFinished())
+            EState = EntityState.IDLE;
     }
 
     private void Flip(int Value)
@@ -124,6 +149,15 @@ public class Player extends Entity
         else if (Speed == 0)                             SetState(EntityState.IDLE);
         else if (0 < Speed && Speed <= WalkSpeed)        SetState(EntityState.WALK);
         else if (WalkSpeed < Speed && Speed <= RunSpeed) SetState(EntityState.RUN);
+    }
+
+    // ===== Interactions ========== //
+
+    private Weapon OverlappingWeapon;
+
+    private void SenseWeapon()
+    {
+        OverlappingWeapon = (Weapon)getOneIntersectingObject(Weapon.class);
     }
 
     // ----- Combat ---------- //

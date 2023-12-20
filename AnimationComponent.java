@@ -79,6 +79,15 @@ public class AnimationComponent
 
     private boolean PauseAtEnd   = false;
     private boolean CurrentPause = PauseAtEnd;
+    private boolean Visible = true;
+
+    public void SetVisibility(boolean NewVisible)
+    {
+        Visible = NewVisible;
+
+        for (GreenfootImage Frame : Frames)
+            Frame.setTransparency(Visible ? 255 : 0);
+    }
 
     /*
      * Getting animations frames from folder

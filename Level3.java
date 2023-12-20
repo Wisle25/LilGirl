@@ -15,8 +15,8 @@ public class Level3 extends UWorld
      */
     public Level3()
     {
-        // super(800, 600, 1, 8000, 6000);
-        super(5000 + 1000, 600 + 1000 + 1000, 1, 2500, 1500);
+        super(800, 600, 1, 8000, 6000);
+        // super(5000 + 1000, 600 + 1000 + 1000, 1, 2500, 1500);
         
         prepare();
     }
