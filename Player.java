@@ -120,20 +120,15 @@ public class Player extends Entity
             }
         }
 
+        if (Greenfoot.isKeyDown("Q"))
+            Inventory.ChangeSlot(-1);
+
+        if (Greenfoot.isKeyDown("E"))
+            Inventory.ChangeSlot(1);
+
         // Reset the state when shooting
         if (EState == EntityState.SHOOT && Animations.get(EntityState.SHOOT).IsFinished())
             EState = EntityState.IDLE;
-    }
-
-    private void Flip(int Value)
-    {
-        int LastDirection = Direction;
-        Direction = Value;
-
-        if (LastDirection != Direction)
-            Animations.forEach((Key, Anim) -> {
-                Anim.Flip();
-            });
     }
 
     @Override

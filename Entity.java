@@ -50,6 +50,17 @@ public class Entity extends Actor
     {
     }
 
+    protected void Flip(int Value)
+    {
+        int LastDirection = Direction;
+        Direction = Value;
+
+        if (LastDirection != Direction)
+            Animations.forEach((Key, Anim) -> {
+                Anim.Flip();
+            });
+    }
+
     // ----- Attributes ---------- //
 
     protected int MaxHealth = 100;

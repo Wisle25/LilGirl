@@ -57,7 +57,7 @@ public class InventoryComponent
         }
 
         // Using added item
-        ChangeSlot(existedSlot != -1 ? existedSlot : addToSlot);
+        currentSlot = existedSlot != -1 ? existedSlot : addToSlot;
     }
     
     public void ChangeSlot(int value)

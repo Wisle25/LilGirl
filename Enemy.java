@@ -1,19 +1,151 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Random;
 
-/**
- * Write a description of class Enemy here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Enemy extends Entity
 {
-    /**
-     * Act - do whatever the Enemy wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    // ===== Lifecycles ========== //
+    @Override
+    protected void SetupMovement()
+    {
+        super.SetupMovement();
+
+        Movement.SetAcceleration(13);
+        Movement.SetDeceleration(17);
+        Movement.SetMaxSpeed(PatrolSpeed);
+    }
+
     public void act()
     {
-        // Add your action code here.
+        ReferenceInitializer();
+        Patrolling();
+        CheckPlayer();
+        Chasing();
+        Attacking();
+
+        super.act();
+    }
+
+    // ===== References ========== //
+
+    UWorld World;
+    Player player;
+
+    // Intended to be called once in the begining
+    private void ReferenceInitializer()
+    {
+        if (World == null)
+        {
+            World  = getWorldOfType(UWorld.class);
+
+            // Start patrolling
+            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, () -> StartPatrolling());
+            xSpawn = getX();
+        }
+        if (player == null) player = World.GetPlayer();
+    }
+
+    // ===== Attributes ========== //
+
+    private EnemyState enemyState = EnemyState.PATROLLING;
+    private int PatrolRadius = 500;
+    private int xSpawn;
+
+    // ===== Combat ========== //
+
+    protected int Damage = 10;
+
+    private TimerHandle DamagingTimerHandle = new TimerHandle();
+    private int DamagingTimer = 100;
+
+    // ===== Behavior ========== //
+
+    private TimerHandle PatrolTimerHandle = new TimerHandle();
+    private int PatrolTimer = 500;
+    private int PatrolSpeed = 1;
+    private int PatrolTarget;
+
+    private int Sight = 120;
+    private int ChaseSpeed = 3; 
+    private int InterestMax = 320;
+
+    private void StartPatrolling()
+    {
+        // Pick random patrol target
+        int minTarget = xSpawn - PatrolRadius;
+        int maxTarget = xSpawn + PatrolRadius;
+
+        Random rnd = new Random();
+        PatrolTarget = minTarget + rnd.nextInt(maxTarget - minTarget + 1);
+        int TempDirection = PatrolTarget - getX() > 0 ? 1 : -1;
+        Flip(TempDirection);
+
+        enemyState = EnemyState.PATROLLING;
+        Movement.SetMaxSpeed(PatrolSpeed);
+    }
+
+    protected void Patrolling()
+    {
+        if (enemyState != EnemyState.PATROLLING) return;
+        
+        boolean Right = getOneObjectAtOffset(getImage().getWidth() / 2 + 5, 0, Ground.class) != null;
+        boolean Left  = getOneObjectAtOffset(-getImage().getWidth() / 2 - 5, 0, Ground.class) != null;
+
+        if (GetPlayerDistance() < 5 || Right || Left)
+        {
+            if (Left)  Movement.AddVelocity(1);
+            if (Right) Movement.AddVelocity(-1);
+
+            enemyState = EnemyState.CHECKING;
+            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, () -> StartPatrolling());
+        }
+        else
+            Movement.AddVelocity(Direction);
+    }
+
+    protected void CheckPlayer()
+    {
+        int Start = getX();
+        int End   = Start + Sight * Direction;
+
+        if (player.getX() >= Start && player.getX() <= End)
+        {
+            System.out.println("Start Chasing!");
+            // Start chasing
+            enemyState = EnemyState.CHASING;
+            Movement.SetMaxSpeed(ChaseSpeed);
+
+            // Getting the direction
+            Direction = player.getX() - getX() > 0 ? 1 : -1;
+        }
+    }
+
+    protected void Chasing()
+    {
+        if (enemyState != EnemyState.CHASING) return;
+
+        if (GetPlayerDistance() <= InterestMax && GetPlayerDistance() > 2)
+        {
+            // Getting the direction
+            Direction = player.getX() - getX() > 0 ? 1 : -1;
+            Movement.AddVelocity(Direction);
+        }
+        // Losing interest
+        else if (GetPlayerDistance() > InterestMax)
+            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, () -> StartPatrolling());
+    } 
+
+    protected void Attacking()
+    {
+        boolean CanDamage = getOneIntersectingObject(Player.class) != null
+            && World.GetTimerManager().IsTimerFinished(DamagingTimerHandle);
+        if (CanDamage)
+        {
+            player.ReceiveDamage(Damage, DamageType.GEAR);
+            World.GetTimerManager().StartTimer(DamagingTimerHandle, DamagingTimer);
+        }
+    }
+
+    protected int GetPlayerDistance()
+    {
+        return Math.abs(player.getX() - getX());
     }
 }
