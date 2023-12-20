@@ -186,7 +186,7 @@ public class Level3 extends UWorld
         });
         
         // Bg
-        GreenfootImage bg = new GreenfootImage("images/Bg/bg1.png");
+        GreenfootImage bg = new GreenfootImage("images/Tiles/Level4/Bg3.png");
         SetScrollingBackground(bg);
     }
 }
