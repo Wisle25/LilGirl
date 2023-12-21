@@ -71,6 +71,7 @@ public class MainMenu extends World
     {
         if (!Check()) return;
 
+        Greenfoot.playSound("sfx_scene.wav");
         Greenfoot.setWorld(new TransitionWorld(new Level1(), "Op", 350));
     }
 
