@@ -184,4 +184,9 @@ public abstract class Enemy extends Entity
     {
         return Math.abs(player.getX() - getX());
     }
+
+    protected void SetPatrolRadius(int Value)
+    {
+        PatrolRadius = Value;
+    }
 }
