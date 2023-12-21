@@ -9,6 +9,6 @@ public class Kunti extends Enemy
     {
         Animations = new HashMap<>();
 
-        Animations.put(EntityState.IDLE, new AnimationComponent(this, "images/Kunti", 5));
+        Animations.put(EntityState.IDLE, new AnimationComponent(this, "images/Kunti", 8));
     }
 }

@@ -88,7 +88,7 @@ public abstract class Enemy extends Entity
     private int ChaseSpeed = 2; 
     private int InterestMax = 320;
 
-    private void StartPatrolling()
+    protected void StartPatrolling()
     {
         // Pick random patrol target
         int minTarget = xSpawn - PatrolRadius;
