@@ -93,6 +93,8 @@ public abstract class Enemy extends Entity
 
     protected void StartPatrolling()
     {
+        if (PendingKill) return;
+
         // Pick random patrol target
         int minTarget = xSpawn - PatrolRadius;
         int maxTarget = xSpawn + PatrolRadius;
@@ -108,6 +110,8 @@ public abstract class Enemy extends Entity
 
     protected void Patrolling()
     {
+        if (PendingKill) return;
+
         if (enemyState != EnemyState.PATROLLING) return;
         
         boolean Right = getOneObjectAtOffset(getImage().getWidth() / 2 + 5, 0, Ground.class) != null;
@@ -127,6 +131,8 @@ public abstract class Enemy extends Entity
 
     protected void CheckPlayer()
     {
+        if (PendingKill) return;
+
         int Start = getX();
         int End   = Start + Sight * Direction;
 
@@ -143,6 +149,8 @@ public abstract class Enemy extends Entity
 
     protected void Chasing()
     {
+        if (PendingKill) return;
+
         if (enemyState != EnemyState.CHASING) return;
 
         if (GetPlayerDistance() <= InterestMax && GetPlayerDistance() > 2)
@@ -161,6 +169,8 @@ public abstract class Enemy extends Entity
 
     protected void Attacking()
     {
+        if (PendingKill) return;
+
         boolean CanDamage = getOneIntersectingObject(Player.class) != null
             && World.GetTimerManager().IsTimerFinished(DamagingTimerHandle);
         if (CanDamage)
