@@ -27,9 +27,16 @@ public class Level3 extends UWorld
         // Player
         Player M_Player = new Player();
         SetPlayer(M_Player, 300, 400);
-        M_Player.setLocation(2400, -800 + 1000 + 1000 + 800);
+        // M_Player.setLocation(2400, -800 + 1000 + 1000 + 800);
+        M_Player.setLocation(102, 454 + 1000 + 1000 + 800);
 
-        AddObject(new Weapon("Shuriken", 0.9, 5, 5, 500), 2500, -800 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Shuriken", 60, 12, 5, 500, 25), 2500, -800 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Kapak", 0.8, 6, 5, 500, 50), 707, 466 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Shuriken", 60, 8, 5, 500, 25), 2377, -55 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Botol", 20, 20, 5, 500, 10), 1358, -55 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Botol", 20, 20, 5, 500, 10), 5077, -497 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Kapak", 0.8, 2, 5, 500, 50), 2351, -1649 + 1000 + 1000 + 800);
+        AddObject(new Weapon("Shuriken", 60, 12, 5, 500, 25), 2608, -2152 + 1000 + 1000 + 800);
 
 
         // obstacles

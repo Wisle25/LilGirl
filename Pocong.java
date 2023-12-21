@@ -8,5 +8,9 @@ public class Pocong extends Enemy
         Animations = new HashMap<>();
 
         Animations.put(EntityState.IDLE, new AnimationComponent(this, "images/Poci/Idle", 5));
+
+        Animations.forEach((key, anis) -> {
+            anis.SetScale(0.6);
+        });
     }
 }
