@@ -72,8 +72,6 @@ public class Entity extends Actor
         getWorldOfType(UWorld.class).AddObject(BloodSplash, getX(), getY());
         Greenfoot.playSound("bloodsplash.wav");
 
-        // System.out.println(getClass().getName() + "'s Health: " + Health);
-
         if (Health == 0)
             Die(Type);
     }
