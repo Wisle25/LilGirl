@@ -1,6 +1,8 @@
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
@@ -37,9 +39,7 @@ public class TransitionWorld extends UWorld
 
     // ===== Scenes ========== //
 
-    private GreenfootImage[] Scenes;
-    private int SceneCount;
-    private int CurrentScene = 0;
+    private Queue<GreenfootImage> Scenes;
     private int Delay;
 
     // ===== Changing World ========== //
@@ -58,15 +58,14 @@ public class TransitionWorld extends UWorld
             if (FileFrames == null) return;
 
             // Updating animation properties
-            SceneCount = FileFrames.length;
-            Scenes     = new GreenfootImage[SceneCount];
+            Scenes     = new LinkedList<GreenfootImage>();
             
-            Arrays.sort(FileFrames, 0, SceneCount, Comparator.comparing(File::getName));
+            Arrays.sort(FileFrames, 0, FileFrames.length, Comparator.comparing(File::getName));
 
-            for (int I = 0; I < SceneCount; ++I)
-                Scenes[I] = new GreenfootImage(AnimPath + "/" + FileFrames[I].getName());
+            for (int I = 0; I < FileFrames.length; ++I)
+                Scenes.add(new GreenfootImage(AnimPath + "/" + FileFrames[I].getName()));
 
-            setBackground(Scenes[0]);
+            setBackground(Scenes.peek());
         }  
     }
 
@@ -76,9 +75,10 @@ public class TransitionWorld extends UWorld
 
         if (GetTimerManager().IsTimerFinished(ChangeWorldTimerHandler))
         {
-            if (++CurrentScene < SceneCount)
+            if (!Scenes.isEmpty())
             {
-                setBackground(Scenes[CurrentScene++]);
+                Scenes.remove();
+                setBackground(Scenes.peek());
     
                 // Also recreate the time
                 GetTimerManager().StartTimer(ChangeWorldTimerHandler, Delay);

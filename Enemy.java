@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Enemy extends Entity
+public abstract class Enemy extends Entity
 {
     // ===== Lifecycles ========== //
     @Override
@@ -20,6 +20,7 @@ public class Enemy extends Entity
         CheckPlayer();
         Chasing();
         Attacking();
+        Dissolve();
 
         super.act();
     }
@@ -37,7 +38,7 @@ public class Enemy extends Entity
             World  = getWorldOfType(UWorld.class);
 
             // Start patrolling
-            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, () -> StartPatrolling());
+            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, this::StartPatrolling);
             xSpawn = getX();
         }
         if (player == null) player = World.GetPlayer();
@@ -45,7 +46,7 @@ public class Enemy extends Entity
 
     // ===== Attributes ========== //
 
-    private EnemyState enemyState = EnemyState.PATROLLING;
+    private EnemyState enemyState = EnemyState.CHECKING;
     private int PatrolRadius = 500;
     private int xSpawn;
 
@@ -55,6 +56,26 @@ public class Enemy extends Entity
 
     private TimerHandle DamagingTimerHandle = new TimerHandle();
     private int DamagingTimer = 100;
+    private boolean Dissolving = false;
+
+    private void Dissolve()
+    {
+        if (!Dissolving) return;
+
+        getImage().setTransparency(
+            getImage().getTransparency() - 30 >= 0 ? getImage().getTransparency() - 30
+            : 0
+        );
+
+        if (getImage().getTransparency() == 0)
+            getWorldOfType(UWorld.class).RemoveObject(this);
+    }
+
+    @Override
+    protected void Die(DamageType Type)
+    {
+        Dissolving = true;
+    }
 
     // ===== Behavior ========== //
 
@@ -63,8 +84,8 @@ public class Enemy extends Entity
     private int PatrolSpeed = 1;
     private int PatrolTarget;
 
-    private int Sight = 120;
-    private int ChaseSpeed = 3; 
+    private int Sight = 220;
+    private int ChaseSpeed = 2; 
     private int InterestMax = 320;
 
     private void StartPatrolling()
@@ -108,7 +129,6 @@ public class Enemy extends Entity
 
         if (player.getX() >= Start && player.getX() <= End)
         {
-            System.out.println("Start Chasing!");
             // Start chasing
             enemyState = EnemyState.CHASING;
             Movement.SetMaxSpeed(ChaseSpeed);
@@ -130,7 +150,10 @@ public class Enemy extends Entity
         }
         // Losing interest
         else if (GetPlayerDistance() > InterestMax)
-            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, () -> StartPatrolling());
+        {
+            enemyState = EnemyState.CHECKING;
+            World.GetTimerManager().StartTimer(PatrolTimerHandle, PatrolTimer, this::StartPatrolling);
+        }
     } 
 
     protected void Attacking()

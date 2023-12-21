@@ -15,8 +15,8 @@ public class Entity extends Actor
     public void act()
     {
         HandleState();
-        if (Animations != null && !Animations.isEmpty())
-        Animations.get(EState).TickComponent();
+        if (Animations != null && !Animations.isEmpty() && Animations.get(EState) != null)
+            Animations.get(EState).TickComponent();
         Movement              .TickComponent();
     }
 
@@ -69,6 +69,10 @@ public class Entity extends Actor
     public void ReceiveDamage(int Damage, DamageType Type)
     {
         Health = Health - Damage <= 0 ? 0 : Health - Damage;
+        getWorldOfType(UWorld.class).AddObject(BloodSplash, getX(), getY());
+        Greenfoot.playSound("bloodsplash.wav");
+
+        System.out.println(getClass().getName() + "'s Health: " + Health);
 
         if (Health == 0)
             Die(Type);
@@ -83,6 +87,7 @@ public class Entity extends Actor
 
     protected Map<EntityState, AnimationComponent> Animations;
     protected MovementComponent Movement;
+    private Effects BloodSplash = new Effects("BloodSplash", 1);
 
     /* Should setup animation here */
     protected void SetupAnimation()

@@ -46,7 +46,7 @@ public class Weapon extends Actor
         this.PlayerOwner = PlayerOwner;
         
         // Won't adding the count if its dropped already (means the player has own it earlier)
-        if (weaponState != WeaponState.DROPPED) Count += AddAmount;
+        if (weaponState != WeaponState.DROPPED && weaponState != WeaponState.IDLING) Count += AddAmount;
         
         weaponState = WeaponState.TAKEN;
         SetVisibility(false);
@@ -63,6 +63,9 @@ public class Weapon extends Actor
         PlayerOwner = null;
         weaponState = WeaponState.DROPPED;
         SetVisibility(true);
+
+        if (Count == 0)
+            getWorldOfType(UWorld.class).RemoveObject(this);
     }
 
     // ===== Transformations ========== //
@@ -84,10 +87,12 @@ public class Weapon extends Actor
     private final int FALLING_FACTOR = 1;
     private int Speed;
     private int MaxDistance;
+    private int Damage = 20;
 
-    public void Shoot(int Direction)
+    public boolean Shoot(int Direction)
     {
-        if (weaponState == WeaponState.SHOOTING) return;
+        System.out.println("Weapon Left: " + Count);
+        if (weaponState == WeaponState.SHOOTING && Count == 0) return false;
 
         this.Direction = Direction;
         weaponState    = WeaponState.SHOOTING;
@@ -95,6 +100,8 @@ public class Weapon extends Actor
 
         setLocation(PlayerOwner.getX(), PlayerOwner.getY() - PlayerOwner.getImage().getHeight() / 2);
         SetVisibility(true);
+
+        return true;
     }
 
     private void CheckCollision()
@@ -103,12 +110,14 @@ public class Weapon extends Actor
 
         Enemy enemy = (Enemy)getOneIntersectingObject(Enemy.class);
         // Environment Env = (Environment)getOneIntersectingObject(Environment.class);
-System.out.println("Enemy null? " + (enemy == null) + "; Distance? " + Distance);
+
         if (enemy != null || /*Env != null ||*/ Distance >= MaxDistance)
         {
             Distance = 0;
             weaponState = WeaponState.TAKEN;
             SetVisibility(false);
+
+            if (enemy != null) enemy.ReceiveDamage(Damage, null);
         }
     }
 
@@ -122,5 +131,10 @@ System.out.println("Enemy null? " + (enemy == null) + "; Distance? " + Distance)
         int xOffset = Speed * Direction;
         setLocation(getX() + xOffset, getY() + FALLING_FACTOR);
         Distance += Math.abs(xOffset);
+    }
+
+    public int GetCount()
+    {
+        return Count;
     }
 }
