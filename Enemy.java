@@ -23,6 +23,8 @@ public abstract class Enemy extends Entity
         Dissolve();
 
         super.act();
+
+        if (PendingKill) getWorldOfType(UWorld.class).RemoveObject(this);
     }
 
     // ===== References ========== //
@@ -57,6 +59,7 @@ public abstract class Enemy extends Entity
     private TimerHandle DamagingTimerHandle = new TimerHandle();
     private int DamagingTimer = 100;
     private boolean Dissolving = false;
+    private boolean PendingKill = false;
 
     private void Dissolve()
     {
@@ -68,7 +71,7 @@ public abstract class Enemy extends Entity
         );
 
         if (getImage().getTransparency() == 0)
-            getWorldOfType(UWorld.class).RemoveObject(this);
+            PendingKill = true;
     }
 
     @Override
