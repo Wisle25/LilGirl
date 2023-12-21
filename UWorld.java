@@ -61,6 +61,10 @@ public class UWorld extends World
     private TimerManager M_TimerManager;
     public  TimerManager GetTimerManager() { return M_TimerManager; }
 
+    // ===== States ========== //
+
+    public static int PlayerScore;
+
     // ----- Camera Follow ---------- //
 
     private int ScrollingWidth, ScrollingHeight; // dimensions of scrolling area

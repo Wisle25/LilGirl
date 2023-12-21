@@ -1,5 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Map;
+import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 
 /**
@@ -11,6 +15,8 @@ import java.util.HashMap;
 public class MainMenu extends World
 {
     // ===== Lifecycle ========== //
+
+    String UserName;
 
     public MainMenu()
     {    
@@ -44,6 +50,8 @@ public class MainMenu extends World
 
     public void act()
     {
+        AskUsername();
+
         if (Greenfoot.isKeyDown("backspace") && bDisplaying)
         {
             bDisplaying = false;
@@ -60,6 +68,8 @@ public class MainMenu extends World
     String MainBg = "images/Bg/menufinal.png";
     String HTPlay = "images/Contents/Howtoplay.png";
     String Credit = "images/Contents/Credit.png";
+
+    boolean Asked = false;
 
     boolean bDisplaying = false;
 
@@ -107,5 +117,35 @@ public class MainMenu extends World
      */
     private void prepare()
     {
+    }
+
+    private void AskUsername()
+    {
+        if (Asked) return;
+
+        while (!Asked)
+        {
+            UserName = Greenfoot.ask("Insert your username: (Only lowercase allowed, max 10 characters, minimum 1 digit)");
+
+            if (UserName.matches("(?=.*\\d)[a-z\\d]{1,10}"))
+            {
+                Asked = true;
+            }
+        }
+
+        getBackground().drawImage(new GreenfootImage("Welcome ".concat(UserName), 20, Color.RED, null), 20, 20);
+
+        // Save to file
+        String filePath = "Score.txt";
+        Path Score = Path.of(filePath);
+
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(Score, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            writer.write(UserName);
+            writer.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

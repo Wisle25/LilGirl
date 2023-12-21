@@ -65,8 +65,7 @@ public class TransitionWorld extends UWorld
             for (int I = 0; I < FileFrames.length; ++I)
                 Scenes.add(new GreenfootImage(AnimPath + "/" + FileFrames[I].getName()));
 
-            setBackground(Scenes.peek());
-            Scenes.remove();
+            setBackground(Scenes.remove());
         }  
     }
 
@@ -78,8 +77,7 @@ public class TransitionWorld extends UWorld
         {
             if (!Scenes.isEmpty())
             {
-                setBackground(Scenes.peek());
-                Scenes.remove();
+                setBackground(Scenes.remove());
     
                 // Also recreate the time
                 GetTimerManager().StartTimer(ChangeWorldTimerHandler, Delay);

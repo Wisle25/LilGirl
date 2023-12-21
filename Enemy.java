@@ -78,6 +78,7 @@ public abstract class Enemy extends Entity
     protected void Die(DamageType Type)
     {
         Dissolving = true;
+        
     }
 
     // ===== Behavior ========== //

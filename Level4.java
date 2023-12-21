@@ -133,7 +133,7 @@ public class Level4 extends UWorld
         AddObject(FinishCheckpoint, 4613, -2366 + 1000);
         FinishCheckpoint.OnArrived(() -> {
             Greenfoot.playSound("CloseDoor.wav");
-            Greenfoot.setWorld(new TransitionWorld(new Level4(), "ToBeContinued", 100));
+            Greenfoot.setWorld(new TransitionWorld(new MainMenu(), "ToBeContinued", 100));
         });
         
         // Bg

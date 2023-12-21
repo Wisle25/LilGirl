@@ -91,7 +91,6 @@ public class Weapon extends Actor
 
     public boolean Shoot(int Direction)
     {
-        System.out.println("Weapon Left: " + Count);
         if (weaponState == WeaponState.SHOOTING && Count == 0) return false;
 
         this.Direction = Direction;
