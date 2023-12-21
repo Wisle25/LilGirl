@@ -71,7 +71,7 @@ public class MainMenu extends World
     {
         if (!Check()) return;
 
-        Greenfoot.setWorld(new Level1());
+        Greenfoot.setWorld(new TransitionWorld(new Level1(), "Op", 750));
     }
 
     private void HTPlayBtnPressed()

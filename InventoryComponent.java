@@ -62,7 +62,7 @@ public class InventoryComponent
     
     public void ChangeSlot(int value)
     {
-        currentSlot = currentSlot + value > 2 ? 1 : currentSlot + value < 0 ? 2 : currentSlot + value;
+        currentSlot = currentSlot + value > 2 ? 0 : currentSlot + value < 0 ? 2 : currentSlot + value;
     }
     
     public boolean Shoot(int Direction)
@@ -70,10 +70,13 @@ public class InventoryComponent
         // Failed shooting
         if (weapons.get(currentSlot) == null) return false;
         
-        weapons.get(currentSlot).Shoot(Direction);
-        
         // Success shooting
-        return true;
+        boolean Success = weapons.get(currentSlot).Shoot(Direction);
+
+        if (weapons.get(currentSlot).GetCount() == 0)
+            DropFromInventory();
+
+        return Success;
     }
 
     public void DropFromInventory()

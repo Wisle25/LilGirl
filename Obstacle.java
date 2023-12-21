@@ -13,7 +13,6 @@ public class Obstacle extends Environment
     // ----- Components ---------- //
 
     protected AnimationComponent Anim;
-    private Effects BloodSplash = new Effects("BloodSplash", 1);
 
     public void SetScale(double Value)
     {
@@ -50,10 +49,6 @@ public class Obstacle extends Environment
 
             // Start new timer
             World.GetTimerManager().StartTimer(DamageTimerHandler, 30);
-
-            // Spawn blood and sound effect
-            World.AddObject(BloodSplash, Character.getX(), Character.getY());
-            Greenfoot.playSound("bloodsplash.wav");
         }
     }
 }
