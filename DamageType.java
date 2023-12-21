@@ -2,5 +2,6 @@ public enum DamageType
 {
     FALL,
     SPIKE,
-    GEAR    
+    GEAR,
+    GHOST
 }
