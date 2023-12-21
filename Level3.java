@@ -29,6 +29,8 @@ public class Level3 extends UWorld
         SetPlayer(M_Player, 300, 400);
         M_Player.setLocation(2400, -800 + 1000 + 1000 + 800);
 
+        AddObject(new Weapon("Shuriken", 0.9, 5, 5, 500), 2500, -800 + 1000 + 1000 + 800);
+
 
         // obstacles
         AddObject(new Gear(), 228, 486 + 1000 + 1000 + 800);

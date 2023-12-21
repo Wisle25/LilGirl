@@ -15,8 +15,8 @@ public class Level4 extends UWorld
      */
     public Level4()
     {
-        // super(800, 600, 1, 8000, 6000);
-        super(5000 + 1000, 600 + 1000 + 500, 1, 2500, 1500);
+        super(800, 600, 1, 8000, 6000);
+        // super(5000 + 1000, 600 + 1000 + 500, 1, 2500, 1500);
         
         prepare();
     }
@@ -28,6 +28,9 @@ public class Level4 extends UWorld
         Player M_Player = new Player();
         SetPlayer(M_Player, 300, 400);
         M_Player.setLocation(130, 437 + 1000 + 500);
+
+        AddObject(new Weapon("Shuriken", 60, 20, 15, 500), 180, 437 + 1000 + 500);
+
 
         // obstacles
         AddObject(new Pocong(), 882, 458 + 1000 + 500);
@@ -43,6 +46,7 @@ public class Level4 extends UWorld
         AddObject(new Pocong(), 671, -268 + 1000 + 500);
         AddObject(new Jalangkung(), 571, -268 + 1000 + 500);
 
+        AddObject(new Weapon("Shuriken", 60, 20, 15, 500), 1271, -268 + 1000 + 500);
 
         AddObject(new Web(), 1730, -770 + 1000 + 500);
         AddObject(new Web(), 1780, -770 + 1000 + 500);
@@ -133,7 +137,7 @@ public class Level4 extends UWorld
         });
         
         // Bg
-        GreenfootImage bg = new GreenfootImage("images/Tiles/Level4/Bg4.png");
+        GreenfootImage bg = new GreenfootImage("images/Tiles/Level4/Bg3.png");
         bg.scale(4000, 4000);
         SetScrollingBackground(bg);
     }
