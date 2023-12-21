@@ -4,11 +4,12 @@ public class Weapon extends Actor
 {
     // ===== Lifecycles ========== //
 
-    public Weapon(String Name, double Scale, int AddAmount, int Speed, int MaxDistance)
+    public Weapon(String Name, double Scale, int AddAmount, int Speed, int MaxDistance, int Damage)
     {
         this.AddAmount = AddAmount;
         this.Speed = Speed;
         this.MaxDistance = MaxDistance;
+        this.Damage = Damage;
 
         String path = "images/Weapons/" + Name;
 
