@@ -165,7 +165,7 @@ public abstract class Enemy extends Entity
             && World.GetTimerManager().IsTimerFinished(DamagingTimerHandle);
         if (CanDamage)
         {
-            player.ReceiveDamage(Damage, DamageType.GEAR);
+            player.ReceiveDamage(Damage, DamageType.GHOST);
             World.GetTimerManager().StartTimer(DamagingTimerHandle, DamagingTimer);
         }
     }

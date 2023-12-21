@@ -191,6 +191,10 @@ public class Player extends Entity
                 Path = "Spiked";
                 break;
 
+            case GHOST:
+                Path = "Ghost";
+                break;
+
             default:
                 Path = "Gear";
                 break;
