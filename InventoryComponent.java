@@ -63,6 +63,12 @@ public class InventoryComponent
     public void ChangeSlot(int value)
     {
         currentSlot = currentSlot + value > 2 ? 0 : currentSlot + value < 0 ? 2 : currentSlot + value;
+
+        
+    }
+    public String GetSlot()
+    {
+        return weapons.get(currentSlot) == null ? "None" : weapons.get(currentSlot).getClass().getName();
     }
     
     public boolean Shoot(int Direction)

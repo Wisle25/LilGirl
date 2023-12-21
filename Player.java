@@ -122,7 +122,12 @@ public class Player extends Entity
 
         String ChangePressed = Greenfoot.getKey();
         if (ChangePressed != null)
+        {
             Inventory.ChangeSlot(ChangePressed.equals("q") ? -1 : ChangePressed.equals("e") ? 1 : 0);
+            getWorldOfType(UWorld.class).getBackground().drawImage(new GreenfootImage(
+                "Current Weapon: " + Inventory.GetSlot(), 10, Color.WHITE, null 
+            ), MaxHealth, Direction);
+        }
 
         // Reset the state when shooting
         if (EState == EntityState.SHOOT && Animations.get(EntityState.SHOOT).IsFinished())
