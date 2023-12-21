@@ -15,8 +15,8 @@ public class Level3 extends UWorld
      */
     public Level3()
     {
-        super(800, 600, 1, 8000, 6000);
-        // super(5000 + 1000, 600 + 1000 + 1000 + 800, 1, 2500, 1500);
+        // super(800, 600, 1, 8000, 6000);
+        super(5000 + 1000, 600 + 1000 + 1000 + 800, 1, 2500, 1500);
         
         prepare();
     }
@@ -32,7 +32,7 @@ public class Level3 extends UWorld
 
         // obstacles
         AddObject(new Gear(), 228, 486 + 1000 + 1000 + 800);
-        AddObject(new STrow(90, 5), 521, 238 + 1000 + 1000 + 800 );
+        AddObject(new STrow(90, 5), 521, 238 + 1000 + 1000 + 800);
 
         AddObject(new Log(), 1046, 419 + 1000 + 1000 + 800);
         
@@ -65,6 +65,22 @@ public class Level3 extends UWorld
         AddObject(new Spike(), 2235, -2130 + 1000 + 1000 + 800);
         AddObject(new Spike(), 2375, -2130 + 1000 + 1000 + 800);
         AddObject(new Gear(), 3580, -2257 + 1000 + 1000 + 800);
+        AddObject(new Log(), 4387, 105 + 1000 + 1000 + 800);
+
+        // enemy
+        AddObject(new Kunti(), 1669, 390 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 2069, 390 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 3240, 462 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 1254, -59 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 1754, -59 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 2254, -59 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 754, -59 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 4847, -497 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 2932, -723 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 1991, -1648 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 2835, -2155 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 3080, -2155 + 1000 + 1000 + 800);
+        AddObject(new Kunti(), 4377, -2368 + 1000 + 1000 + 800);
 
         
         AddObject(new Decoration("pintuFinish", 0.85), 99, 454  + 1000 + 1000 + 800); // start
