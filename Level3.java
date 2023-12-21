@@ -69,18 +69,19 @@ public class Level3 extends UWorld
 
         // enemy
         AddObject(new Kunti(), 1669, 390 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 2069, 390 + 1000 + 1000 + 800);
+        AddObject(new Pocong(), 2069, 390 + 1000 + 1000 + 800);
         AddObject(new Kunti(), 3240, 462 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 1254, -59 + 1000 + 1000 + 800);
+        AddObject(new Jalangkung(), 1254, -59 + 1000 + 1000 + 800);
         AddObject(new Kunti(), 1754, -59 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 2254, -59 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 754, -59 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 4847, -497 + 1000 + 1000 + 800);
+        AddObject(new Pocong(), 2254, -59 + 1000 + 1000 + 800);
+        AddObject(new Pocong(), 754, -59 + 1000 + 1000 + 800);
+        AddObject(new Jalangkung(), 4847, -497 + 1000 + 1000 + 800);
         AddObject(new Kunti(), 2932, -723 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 1991, -1648 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 2835, -2155 + 1000 + 1000 + 800);
-        AddObject(new Kunti(), 3080, -2155 + 1000 + 1000 + 800);
+        AddObject(new Pocong(), 1991, -1648 + 1000 + 1000 + 800);
+        AddObject(new Pocong(), 2835, -2155 + 1000 + 1000 + 800);
+        AddObject(new Jalangkung(), 3080, -2155 + 1000 + 1000 + 800);
         AddObject(new Kunti(), 4377, -2368 + 1000 + 1000 + 800);
+        AddObject(new Jalangkung(), 4677, -2368 + 1000 + 1000 + 800);
 
         
         AddObject(new Decoration("pintuFinish", 0.85), 99, 454  + 1000 + 1000 + 800); // start

@@ -30,6 +30,20 @@ public class Level4 extends UWorld
         M_Player.setLocation(130, 437 + 1000 + 500);
 
         // obstacles
+        AddObject(new Pocong(), 882, 458 + 1000 + 500);
+        AddObject(new Kunti(), 1082, 458 + 1000 + 500);
+        AddObject(new Jalangkung(), 1282, 458 + 1000 + 500);
+        AddObject(new Jalangkung(), 1482, 458 + 1000 + 500);
+
+        AddObject(new Kunti(), 1171, -268 + 1000 + 500);
+        AddObject(new Pocong(), 1071, -268 + 1000 + 500);
+        AddObject(new Jalangkung(), 971, -268 + 1000 + 500);
+        AddObject(new Kunti(), 871, -268 + 1000 + 500);
+        AddObject(new Jalangkung(), 771, -268 + 1000 + 500);
+        AddObject(new Pocong(), 671, -268 + 1000 + 500);
+        AddObject(new Jalangkung(), 571, -268 + 1000 + 500);
+
+
         AddObject(new Web(), 1730, -770 + 1000 + 500);
         AddObject(new Web(), 1780, -770 + 1000 + 500);
         AddObject(new Web(), 1830, -770 + 1000 + 500);
